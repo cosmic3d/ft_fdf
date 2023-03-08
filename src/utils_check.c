@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   utils_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/08 17:27:04 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/03/08 20:23:50 by jenavarr         ###   ########.fr       */
+/*   Created: 2023/03/08 19:04:28 by jenavarr          #+#    #+#             */
+/*   Updated: 2023/03/08 20:44:27 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../hdrs/fdf.h"
 
-int	main(int argc, char **argv)
+void	f_exit(char *err_message)
 {
-	if (argc == 1)
-		f_exit("You need to introduce a map to represent");
-	else if (argc >= 3)
-		f_exit("Too many maps!");
-	if (!check_filename(argv[1]))
-		f_exit("The file you introduced is not a .fdf file");
-	return (0);
+	ft_printf("%s\n", err_message);
+	exit(1);
+}
+
+int	check_filename(char *file)
+{
+	int	last;
+
+	last = ft_strlen(file) - 1;
+	if (ft_strlen(file) < ft_strlen(".fdf") + 1)
+		return (0);
+	if (file[last] != 'f' || file[last - 1] != 'd' || file[last - 2] != 'f')
+		return (0);
+	if (file[last - 3] != '.')
+		return (0);
+	return (1);
 }

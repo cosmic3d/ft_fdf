@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:19:33 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/03/08 18:21:47 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/03/08 20:17:07 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,6 @@
 # include <errno.h>
 # include <math.h>
 /* -------------------------------- FUNCTIONS ------------------------------- */
+void	f_exit(char *err_message);
+int		check_filename(char *file);
 #endif

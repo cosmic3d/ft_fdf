@@ -28,7 +28,7 @@ PRINTF_DIR = lib/ft_printf/
 # -=-=-=-=-	CMNDS -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 CC			= gcc
 SANS		= -fsanitize=address -g
-CFLAGS		= -Wall -Werror -Wextra
+CFLAGS		= -Wall -Werror -Wextra -D BUFFER_SIZE=42
 LFLAGS		=  -L$(LBX_DIR) -lmlx -framework OpenGL -framework AppKit
 AR			= ar -rcs
 RM			= rm -f
@@ -44,7 +44,7 @@ LIBS_HDRS	+= $(LBX_DIR)mlx.h
 INCLUDE		= -I $(LIBS_HDRS)
 
 # -=-=-=-=-	SOURCES -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
-SRCS		+= fdf.c utils_check.c
+SRCS		+= fdf.c utils_check.c free.c get_next_line.c get_next_line_utils.c pixels.c
 
 # -=-=-=-=-	OBJECTS/DEPENDENCIES -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 

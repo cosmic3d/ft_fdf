@@ -6,19 +6,31 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:27:04 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/03/08 20:23:50 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/03/25 01:12:44 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../hdrs/fdf.h"
 
+void	init_system(t_system *sys)
+{
+	sys->mlx_ptr = mlx_init();
+	if (!sys->mlx_ptr)
+		f_exit("Mlx pointer creation failed");
+	sys->mlx_win = mlx_new_window(sys->mlx_ptr, WINX, WINY, "cosmic3d FDF");
+	if (!sys->mlx_win)
+		f_exit("Mlx window creation failed");
+	sys->img = get_img(sys);
+	put_pixel(sys->img, 10, 10, 0xFFFFFF);
+	mlx_put_image_to_window(sys->mlx_ptr, sys->mlx_win, sys->img->img, 0, 0);
+	mlx_loop(sys->mlx_ptr);
+}
+
 int	main(int argc, char **argv)
 {
-	if (argc == 1)
-		f_exit("You need to introduce a map to represent");
-	else if (argc >= 3)
-		f_exit("Too many maps!");
-	if (!check_filename(argv[1]))
-		f_exit("The file you introduced is not a .fdf file");
+	t_system	sys;
+
+	check_all(argc, argv);
+	init_system(&sys);
 	return (0);
 }

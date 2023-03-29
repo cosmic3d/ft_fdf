@@ -6,13 +6,13 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:04:28 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/03/24 21:26:42 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/03/29 21:20:55 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../hdrs/fdf.h"
 
-void	check_all(int argc, char **argv)
+void	check_all(int argc, char **argv, t_map *map)
 {
 	int		fd;
 
@@ -28,14 +28,9 @@ void	check_all(int argc, char **argv)
 		perror("Error");
 		exit(1);
 	}
-	if (!check_rectangle(fd))
+	if (!check_valid(fd, map))
 		f_exit("The map you introduced is not a rectangle!");
-}
-
-void	f_exit(char *err_message)
-{
-	ft_printf("%s\n", err_message);
-	exit(1);
+	close(fd);
 }
 
 int	check_filename(char *file)
@@ -52,7 +47,7 @@ int	check_filename(char *file)
 	return (1);
 }
 
-int	count_columns(int fd)
+int	count_or_check_line(int fd)
 {
 	char	*line;
 	char	**points;
@@ -62,9 +57,14 @@ int	count_columns(int fd)
 	line = get_next_line(fd);
 	if (!line)
 		return (0);
+	if (forbidden_chars(line, "0123456789abcdefABCDEF, xX"))
+		f_exit("Forbidden characters were detected");
+	if (!ft_strchr(line, ' ') || !ft_strchr(line, '\n'))
+		f_exit("Map syntax error");
 	points = ft_split(line, ' ');
 	if (!points)
-		return (0);
+		f_exit("Split failed");
+	check_line_points(points);
 	while (points[i])
 		i++;
 	ft_free(points);
@@ -72,22 +72,52 @@ int	count_columns(int fd)
 	return (i - 1);
 }
 
-int	check_rectangle(int fd)
+int	check_valid(int fd, t_map *map)
 {
 	int		line1;
 	int		line;
 
-	line1 = count_columns(fd);
+	line1 = count_or_check_line(fd);
+	map->length += line1;
 	if (!line1)
 		return (0);
-	line = count_columns(fd);
+	line = count_or_check_line(fd);
 	if (line1 != line)
 		return (0);
 	while (line)
 	{
 		if (line1 != line)
 			return (0);
-		line = count_columns(fd);
+		line = count_or_check_line(fd);
+		map->length += line1;
 	}
 	return (1);
+}
+
+void	check_line_points(char **line)
+{
+	int		i;
+	char	**num_n_color;
+
+	i = 0;
+	while (line[i])
+		i++;
+	if (i <= 2)
+		f_exit("Not enough points to create a map");
+	i = 0;
+	while (line[i] && line[i][0] != '\n')
+	{
+		if (count_char(line[i], ',') > 1)
+			f_exit("Syntax error on some point, too many commas");
+		else if (count_char(line[i], ',') == 1)
+		{
+			num_n_color = ft_split(line[i], ',');
+			if (!num_n_color)
+				f_exit("Split allocation error");
+			check_hexadecimal(num_n_color[1], &num_n_color);
+		}
+		if (forbidden_chars(*num_n_color, "0123456789"))
+			f_exit("The Y value of a point is not a valid integer");
+		ft_free(num_n_color);
+	}
 }

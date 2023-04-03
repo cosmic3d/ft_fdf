@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:04:28 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/03/29 21:20:55 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:09:16 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	count_or_check_line(int fd)
 	line = get_next_line(fd);
 	if (!line)
 		return (0);
-	if (forbidden_chars(line, "0123456789abcdefABCDEF, xX"))
+	if (forbidden_chars(line, "0123456789ABCDEF, xX-+"))
 		f_exit("Forbidden characters were detected");
 	if (!ft_strchr(line, ' ') || !ft_strchr(line, '\n'))
 		f_exit("Map syntax error");
@@ -97,27 +97,27 @@ int	check_valid(int fd, t_map *map)
 void	check_line_points(char **line)
 {
 	int		i;
-	char	**num_n_color;
+	char	**vals;
 
 	i = 0;
 	while (line[i])
 		i++;
 	if (i <= 2)
 		f_exit("Not enough points to create a map");
-	i = 0;
-	while (line[i] && line[i][0] != '\n')
+	i = -1;
+	while (line[++i] && line[i][0] != '\n')
 	{
+		vals = ft_split(line[i], ',');
 		if (count_char(line[i], ',') > 1)
 			f_exit("Syntax error on some point, too many commas");
 		else if (count_char(line[i], ',') == 1)
 		{
-			num_n_color = ft_split(line[i], ',');
-			if (!num_n_color)
+			if (!vals || !vals[1])
 				f_exit("Split allocation error");
-			check_hexadecimal(num_n_color[1], &num_n_color);
+			check_hexadecimal(vals[1], &vals);
 		}
-		if (forbidden_chars(*num_n_color, "0123456789"))
+		if (forbidden_chars(*vals, "0123456789+-") || !check_num(*vals))
 			f_exit("The Y value of a point is not a valid integer");
-		ft_free(num_n_color);
+		ft_free(vals);
 	}
 }

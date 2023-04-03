@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:19:33 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/03/29 21:23:47 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/03 16:41:19 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,13 @@ int		check_valid(int fd, t_map *map);
 void	check_line_points(char **line);
 int		count_char(char *str, char c);
 int		forbidden_chars(char *str, char *allowed);
-int		check_hexadecimal(char *str, char ***tofree);
-int		check_int(char **s);
+void	check_hexadecimal(char *str, char ***tofree);
+int		check_num(char *str);
+int		check_int(char *s);
 int		check_limits_when_10(char *str, int sign);
 void	ft_free(char **str);
 t_data	*get_img(t_system *sys);
 void	put_pixel(t_data *img, int x, int y, int color);
+/* ---------------------------------- DEBUG --------------------------------- */
+void	debug_split(char **strings);
 #endif

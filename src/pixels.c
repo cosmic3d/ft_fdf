@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 23:08:28 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/03/25 01:12:02 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:52:30 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ void	put_pixel(t_data *img, int x, int y, int color)
 	char	*pixel;
 
 	pixel = img->addr + (y * img->line) + (x * (img->bpp / 8));
-
 	*(unsigned int *)pixel = color;
 }

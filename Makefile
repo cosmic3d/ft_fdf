@@ -44,7 +44,7 @@ LIBS_HDRS	+= $(LBX_DIR)mlx.h
 INCLUDE		= -I $(LIBS_HDRS)
 
 # -=-=-=-=-	SOURCES -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
-SRCS		+= fdf.c utils_check.c free.c get_next_line.c get_next_line_utils.c pixels.c utils_check2.c int_check.c debug.c
+SRCS		+= fdf.c utils_check.c free.c get_next_line.c get_next_line_utils.c pixels.c utils_check2.c int_check.c parse.c debug.c
 
 # -=-=-=-=-	OBJECTS/DEPENDENCIES -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 

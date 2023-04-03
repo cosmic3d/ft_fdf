@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 20:01:39 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/03 16:56:32 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/03 20:51:18 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,18 @@ void	check_hexadecimal(char *str, char ***tofree)
 		f_exit("Your hexadecimal number is wrong");
 	}
 	str += 2;
-	if (forbidden_chars(str, "0123456789ABCDEF"))
+	if (forbidden_chars(str, "0123456789abcdefABCDEF"))
 	{
 		ft_free(*tofree);
 		f_exit("Your hexadecimal number is wrong");
 	}
+}
+
+char	uppercase(char c)
+{
+	if ((c < 'a' || c > 'z') || (c < 'A' || c > 'Z'))
+		return (0);
+	if ((c >= 'a' && c <= 'z'))
+		c -= 32;
+	return (c);
 }

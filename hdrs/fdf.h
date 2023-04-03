@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:19:33 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/03 16:41:19 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/03 20:58:10 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	check_line_points(char **line);
 int		count_char(char *str, char c);
 int		forbidden_chars(char *str, char *allowed);
 void	check_hexadecimal(char *str, char ***tofree);
+char	uppercase(char c);
 int		check_num(char *str);
 int		check_int(char *s);
 int		check_limits_when_10(char *str, int sign);

@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:04:28 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/03 17:09:16 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:51:37 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	count_or_check_line(int fd)
 	line = get_next_line(fd);
 	if (!line)
 		return (0);
-	if (forbidden_chars(line, "0123456789ABCDEF, xX-+"))
+	if (forbidden_chars(line, "0123456789abcdefABCDEF, xX-+"))
 		f_exit("Forbidden characters were detected");
 	if (!ft_strchr(line, ' ') || !ft_strchr(line, '\n'))
 		f_exit("Map syntax error");

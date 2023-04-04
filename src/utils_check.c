@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:04:28 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/03 17:51:37 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/04 16:49:48 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	check_valid(int fd, t_map *map)
 	int		line;
 
 	line1 = count_or_check_line(fd);
+	map->ll = line1;
 	map->length += line1;
 	if (!line1)
 		return (0);

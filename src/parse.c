@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 19:30:41 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/03 21:51:10 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:53:05 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,26 @@ unsigned int	hexstr_to_int(char *str)
 		shift += 4;
 	}
 	return (result);
+}
+
+unsigned int	compose_color(unsigned int value, int endian)
+{
+	unsigned char	*bytes;
+	unsigned int	color;
+
+	bytes = (unsigned char *)&value;
+	color = 0;
+	if (!endian)
+	{
+		color |= bytes[0];
+		color |= bytes[1] << 8;
+		color |= bytes[2] << 16;
+		color |= bytes[3] << 24;
+		return (color);
+	}
+	color |= bytes[3];
+	color |= bytes[2] << 8;
+	color |= bytes[1] << 16;
+	color |= bytes[0] << 24;
+	return (color);
 }

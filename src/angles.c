@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   angles.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 17:55:18 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/06 19:48:08 by jenavarr         ###   ########.fr       */
+/*   Created: 2023/04/06 17:19:06 by jenavarr          #+#    #+#             */
+/*   Updated: 2023/04/06 19:26:36 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../hdrs/fdf.h"
 
-void	connect_points(t_system *sys)
+void	isometric(t_system *sys)
 {
-	int	i;
-	int	ll;
+	float	x_iso;
+	float	y_iso;
+	int		i;
 
 	i = -1;
-	ll = sys->map.ll;
 	while (++i < sys->map.length)
 	{
-		if (i + ll < sys->map.length)
-			draw_line(sys, sys->map.points[i], sys->map.points[i + ll]);
-		if ((i + 1) % ll != 0)
-			draw_line(sys, sys->map.points[i], sys->map.points[i + 1]);
+		x_iso = (sys->map.points[i].pos[X] - sys->map.points[i].pos[Y]) \
+		* cos(deg_to_rad(sys->view.angle)) * sys->view.scale + WINX / 2;
+		y_iso = (sys->map.points[i].pos[X] + sys->map.points[i].pos[Y]) \
+		* sin(deg_to_rad(sys->view.angle)) * sys->view.scale - \
+		sys->map.points[i].pos[Z] * sys->view.z_scale + WINX / 2;
+		sys->map.points[i].spos[X] = x_iso;
+		sys->map.points[i].spos[Y] = y_iso;
 	}
-}
-
-void	render(t_system *sys)
-{
-	init_view(sys);
-	debug_points(sys);
-	connect_points(sys);
-	mlx_put_image_to_window(sys->mlx_ptr, sys->mlx_win, sys->img->img, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 15:13:58 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/04 17:13:17 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/06 18:48:08 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	load_map(t_system *sys, int fd)
 {
 	int		x;
-	int		z;
+	int		y;
 	char	*line;
 	char	**points;
 
-	z = 0;
+	y = 0;
 	sys->map.points = (t_point *)malloc(sizeof(t_point) * sys->map.length);
 	line = get_next_line(fd);
 	if (!sys->map.points || !line)
@@ -32,15 +32,15 @@ void	load_map(t_system *sys, int fd)
 		if (!points)
 			f_exit("Split error when loading in the points");
 		while (points[++x])
-			sys->map.points[x + (z * sys->map.ll)] = \
-			load_xyz(points[x], x, z, sys->img->endian);
+			sys->map.points[x + (y * sys->map.ll)] = \
+			load_xyz(points[x], x, y, sys->img->endian);
 		ft_free(points);
-		z++;
+		y++;
 		line = get_next_line(fd);
 	}
 }
 
-t_point	load_xyz(char *rawvals, int x, int z, int endian)
+t_point	load_xyz(char *rawvals, int x, int y, int endian)
 {
 	t_point	point;
 	char	**vals;
@@ -52,8 +52,21 @@ t_point	load_xyz(char *rawvals, int x, int z, int endian)
 			f_exit("Split error when loading a point");
 		point.color = compose_color(hexstr_to_int(vals[1]), endian);
 	}
-	point.pos[Y] = ft_atoi(rawvals);
+	point.pos[Y] = y;
 	point.pos[X] = x;
-	point.pos[Z] = z;
+	point.pos[Z] = ft_atoi(rawvals);
+	point.spos[X] = point.pos[X];
+	point.spos[Y] = point.pos[Y];
+	point.spos[Z] = point.pos[Z];
 	return (point);
+}
+
+void	init_dims(t_system *sys)
+{
+	sys->dim.x.min = sys->map.points[0].pos[X];
+	sys->dim.x.max = sys->map.points[0].pos[X];
+	sys->dim.y.min = sys->map.points[0].pos[Y];
+	sys->dim.y.max = sys->map.points[0].pos[Y];
+	sys->dim.z.min = sys->map.points[0].pos[Z];
+	sys->dim.z.max = sys->map.points[0].pos[Z];
 }

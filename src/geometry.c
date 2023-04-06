@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   geometry.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 17:55:18 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/06 19:48:08 by jenavarr         ###   ########.fr       */
+/*   Created: 2023/04/05 16:47:09 by jenavarr          #+#    #+#             */
+/*   Updated: 2023/04/06 19:39:19 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../hdrs/fdf.h"
 
-void	connect_points(t_system *sys)
+void	translate(t_map *map, t_point move)
 {
 	int	i;
-	int	ll;
 
 	i = -1;
-	ll = sys->map.ll;
-	while (++i < sys->map.length)
+	while (++i < map->length)
 	{
-		if (i + ll < sys->map.length)
-			draw_line(sys, sys->map.points[i], sys->map.points[i + ll]);
-		if ((i + 1) % ll != 0)
-			draw_line(sys, sys->map.points[i], sys->map.points[i + 1]);
+		map->points[i].pos[X] += move.pos[X];
+		map->points[i].pos[Y] += move.pos[Y];
+		map->points[i].pos[Z] += move.pos[Z];
 	}
 }
 
-void	render(t_system *sys)
+void	scale(t_map *map, t_point multiplier)
 {
-	init_view(sys);
-	debug_points(sys);
-	connect_points(sys);
-	mlx_put_image_to_window(sys->mlx_ptr, sys->mlx_win, sys->img->img, 0, 0);
+	int	i;
+
+	i = -1;
+	while (++i < map->length)
+	{
+		map->points[i].pos[X] *= multiplier.pos[X];
+		map->points[i].pos[Y] *= multiplier.pos[Y];
+		map->points[i].pos[Z] *= multiplier.pos[Z];
+	}
 }

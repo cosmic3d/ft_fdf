@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:13:52 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/06 19:52:16 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/06 20:38:57 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,17 @@ void	draw_line(t_system *sys, t_point one, t_point two)
 	double	pixel_y;
 	int		pixels;
 
-	delta_x = two.pos[X] - one.pos[X];
-	delta_y = two.pos[Y] - one.pos[Y];
+	delta_x = (double)two.spos[X] - (double)one.spos[X];
+	delta_y = (double)two.spos[Y] - (double)one.spos[Y];
 	pixels = sqrt((delta_x * delta_x) + (delta_y * delta_y));
 	delta_x /= pixels;
 	delta_y /= pixels;
 	pixel_x = delta_x;
 	pixel_y = delta_y;
+	put_pixel(sys->img, 10, 10, 0xFFFFFF);
 	while (pixels)
 	{
-		put_pixel(sys->img, pixel_x, pixel_y, one.color);
+		put_pixel(sys->img, (int)pixel_x, (int)pixel_y, 0xFFFFFF);
 		pixel_x += delta_x;
 		pixel_y += delta_y;
 		pixels--;

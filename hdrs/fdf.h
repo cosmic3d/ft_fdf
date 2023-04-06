@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:19:33 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/06 19:41:50 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/06 20:32:32 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,4 +116,5 @@ void			render(t_system *sys);
 /* ---------------------------------- DEBUG --------------------------------- */
 void			debug_split(char **strings);
 void			debug_points(t_system *sys);
+void			debug_line(t_system *sys);
 #endif

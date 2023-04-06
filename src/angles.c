@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:19:06 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/06 19:26:36 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/06 21:13:30 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void	isometric(t_system *sys)
 		sys->map.points[i].pos[Z] * sys->view.z_scale + WINX / 2;
 		sys->map.points[i].spos[X] = x_iso;
 		sys->map.points[i].spos[Y] = y_iso;
+		printf("Going %i\n", i);
 	}
 }

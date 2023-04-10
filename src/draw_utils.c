@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:13:52 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/06 20:38:57 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/10 18:09:25 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ void	draw_line(t_system *sys, t_point one, t_point two)
 	pixels = sqrt((delta_x * delta_x) + (delta_y * delta_y));
 	delta_x /= pixels;
 	delta_y /= pixels;
-	pixel_x = delta_x;
-	pixel_y = delta_y;
-	put_pixel(sys->img, 10, 10, 0xFFFFFF);
+	pixel_x = one.spos[X];
+	pixel_y = one.spos[Y];
 	while (pixels)
 	{
 		put_pixel(sys->img, (int)pixel_x, (int)pixel_y, 0xFFFFFF);
@@ -43,7 +42,7 @@ void	get_max_dims(t_system *sys)
 
 	i = -1;
 	init_dims(sys);
-	while (i < sys->map.length)
+	while (++i < sys->map.length)
 	{
 		if (sys->map.points[i].pos[X] < sys->dim.x.min)
 			sys->dim.x.min = sys->map.points[i].pos[X];
@@ -77,9 +76,13 @@ float	get_scale_factor(t_system *sys)
 
 void	init_view(t_system *sys)
 {
+	get_max_dims(sys);
 	sys->view.angle = 35.26;
 	sys->view.window_occ = 0.5;
 	sys->view.scale = get_scale_factor(sys);
 	sys->view.z_scale = (WINX * WINY) / (sys->dim.width * sys->dim.height * \
 	pow(sys->view.scale, 2) * log(sys->dim.altitude + 2));
+	// printf("View scale is: %f", sys->view.scale);
+	// printf("View z scale is: %f", sys->view.z_scale);
+	// f_exit("uwu");
 }

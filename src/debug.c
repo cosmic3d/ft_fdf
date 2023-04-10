@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 16:36:47 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/06 20:45:07 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/10 17:42:53 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	debug_line(t_system *sys)
 	t_point	one;
 	t_point	two;
 
-	one.spos[0] = 0;
-	one.spos[1] = 0;
+	one.spos[0] = 960;
+	one.spos[1] = 1120;
 	one.spos[2] = 0;
 	two.spos[0] = 1920;
 	two.spos[1] = 1080;

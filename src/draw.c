@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:55:18 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/06 20:53:00 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/10 19:26:51 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	render(t_system *sys)
 {
 	init_view(sys);
 	isometric(sys);
+	connect_points(sys);
 	debug_points(sys);
-	//connect_points(sys);
-	mlx_put_image_to_window(sys->mlx_ptr, sys->mlx_win, sys->img->img, 1920, 1080);
+	mlx_put_image_to_window(sys->mlx_ptr, sys->mlx_win, sys->img->img, 0, 0);
 }

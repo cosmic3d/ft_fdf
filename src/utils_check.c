@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:04:28 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/16 17:20:11 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/16 22:41:18 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,6 @@ void	check_line_points(char **line)
 	int		i;
 	char	**vals;
 
-	i = 0;
-	while (line[i])
-		i++;
-	// if (i <= 2)
-	// 	f_exit("Not enough points to create a map");
 	i = -1;
 	while (line[++i] && line[i][0] != '\n')
 	{

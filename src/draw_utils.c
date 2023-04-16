@@ -6,35 +6,11 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:13:52 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/10 21:22:05 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/16 20:40:31 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../hdrs/fdf.h"
-
-void	draw_line(t_system *sys, t_point one, t_point two)
-{
-	double	delta_x;
-	double	delta_y;
-	double	pixel_x;
-	double	pixel_y;
-	int		pixels;
-
-	delta_x = (double)two.spos[X] - (double)one.spos[X];
-	delta_y = (double)two.spos[Y] - (double)one.spos[Y];
-	pixels = sqrt((delta_x * delta_x) + (delta_y * delta_y));
-	delta_x /= pixels;
-	delta_y /= pixels;
-	pixel_x = one.spos[X];
-	pixel_y = one.spos[Y];
-	while (pixels)
-	{
-		put_pixel(sys->img, (int)pixel_x, (int)pixel_y, 0xFFFFFF);
-		pixel_x += delta_x;
-		pixel_y += delta_y;
-		pixels--;
-	}
-}
 
 void	get_max_dims(t_system *sys)
 {
@@ -74,6 +50,20 @@ float	get_scale_factor(t_system *sys)
 	return (sys->view.window_occ / scale_y);
 }
 
+void	clean_img(t_system *sys)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < WINY)
+	{
+		j = -1;
+		while (++j < WINX)
+			put_pixel(sys->img, j, i, 0x0);
+	}
+}
+
 void	init_view(t_system *sys)
 {
 	get_max_dims(sys);
@@ -82,7 +72,19 @@ void	init_view(t_system *sys)
 	sys->view.scale = get_scale_factor(sys);
 	sys->view.z_scale = (WINX * WINY) / (sys->dim.width * sys->dim.height * \
 	pow(sys->view.scale, 2) * log(sys->dim.altitude + 2));
+	isometric(sys);
 	// printf("View scale is: %f", sys->view.scale);
 	// printf("View z scale is: %f", sys->view.z_scale);
 	// f_exit("uwu");
+}
+
+unsigned int	get_color_step(unsigned int one, unsigned int two, int p)
+{
+	unsigned int	step_color[4];
+
+	step_color[0] = ((int)(two >> 24) - (int)(one >> 24)) / p;
+	step_color[1] = ((int)((two >> 16) & 0xff) - (int)((one >> 16) & 0xff)) / p;
+	step_color[2] = ((int)((two >> 8) & 0xff) - (int)((one >> 8) & 0xff)) / p;
+	step_color[3] = ((int)(two & 0xff) - (int)(one & 0xff)) / p;
+	return (*(unsigned int *)step_color);
 }

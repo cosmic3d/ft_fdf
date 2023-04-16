@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 15:13:58 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/06 18:48:08 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/16 20:52:46 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ t_point	load_xyz(char *rawvals, int x, int y, int endian)
 	t_point	point;
 	char	**vals;
 
-	if (ft_strrchr(rawvals, ','))
+	point.color = 0xFFFFFF;
+	if (ft_strrchr(rawvals, ',') && point.color != 0)
 	{
 		vals = ft_split(rawvals, ',');
 		if (!vals)

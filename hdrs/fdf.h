@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:19:33 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/06 20:32:32 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/16 20:44:07 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,10 @@ void			ft_free(char **str);
 t_data			*get_img(t_system *sys);
 void			load_map(t_system *sys, int fd);
 t_point			load_xyz(char *rawvals, int x, int z, int endian);
-void			draw_line(t_system *sys, t_point one, t_point two);
+void			draw_line(t_system *sys, t_point one, t_point two, \
+	unsigned int step);
 void			put_pixel(t_data *img, int x, int y, int color);
-void			translate(t_map *map, t_point move);
+void			translate(t_map *map, int x, int y);
 void			scale(t_map *map, t_point multiplier);
 double			deg_to_rad(float degrees);
 void			init_dims(t_system *sys);
@@ -113,6 +114,10 @@ void			get_max_dims(t_system *sys);
 float			get_scale_factor(t_system *sys);
 void			init_view(t_system *sys);
 void			render(t_system *sys);
+void			hook(t_system *sys);
+int				keypressed(int keycode, t_system *sys);
+void			clean_img(t_system *sys);
+unsigned int	get_color_step(unsigned int one, unsigned int two, int p);
 /* ---------------------------------- DEBUG --------------------------------- */
 void			debug_split(char **strings);
 void			debug_points(t_system *sys);

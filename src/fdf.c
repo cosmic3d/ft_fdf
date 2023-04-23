@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:27:04 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/16 18:40:52 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/23 20:54:05 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	init_system(t_system *sys)
 	ft_printf("Number of points is: %i\n", sys->map.length);
 	ft_printf("Number of points per line is: %i\n", sys->map.ll);
 	hook(sys);
+	// debug_colors(sys);
 	init_view(sys);
 	render(sys);
 	mlx_loop(sys->mlx_ptr);

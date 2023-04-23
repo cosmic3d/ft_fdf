@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 16:36:47 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/16 20:48:50 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/23 17:18:10 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,13 @@ void	debug_line(t_system *sys)
 	two.spos[2] = 0;
 	draw_line(sys, one, two, 0x0);
 	mlx_put_image_to_window(sys->mlx_ptr, sys->mlx_win, sys->img->img, 0, 0);
+}
+
+void	debug_colors(t_system *sys)
+{
+	int	i;
+
+	i = -1;
+	while (++i < sys->map.length)
+		printf("Point %i color is: %x\n", i, sys->map.points[i].color);
 }

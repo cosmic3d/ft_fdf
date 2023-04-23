@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:55:18 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/16 20:51:14 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/23 20:04:41 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	draw_line(t_system *sys, t_point one, t_point two, unsigned int step)
 	step = get_color_step(one.color, two.color, pixels);
 	while (pixels)
 	{
-		// printf("Color to apply is: %x\n", one.color);
 		put_pixel(sys->img, (int)pixel_x, (int)pixel_y, one.color);
 		pixel_x += delta_x;
 		pixel_y += delta_y;

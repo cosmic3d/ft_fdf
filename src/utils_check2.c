@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 20:01:39 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/03 20:51:18 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/23 18:41:09 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,14 @@ char	uppercase(char c)
 	if ((c >= 'a' && c <= 'z'))
 		c -= 32;
 	return (c);
+}
+
+void	erase_new_line(char *line)
+{
+	int	i;
+
+	i = -1;
+	while (line && line[++i])
+		if (line[i] == '\n')
+			line[i] = '\0';
 }

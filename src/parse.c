@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 19:30:41 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/06 18:57:13 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/23 20:14:18 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,14 @@ unsigned int	hexstr_to_int(char *str)
 			result |= (uppercase(str[i]) - 'A') << shift;
 		shift += 4;
 	}
+	printf("Value is: %x\n", result);
 	return (result);
 }
 
 unsigned int	compose_color(unsigned int value, int endian)
 {
-	unsigned char	*bytes;
 	unsigned int	color;
+	unsigned char	*bytes;
 
 	bytes = (unsigned char *)&value;
 	color = 0;

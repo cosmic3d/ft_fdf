@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 15:13:58 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/16 20:52:46 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/23 20:51:49 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void	load_map(t_system *sys, int fd)
 	{
 		x = -1;
 		points = ft_split(line, ' ');
-		free(line);
 		if (!points)
 			f_exit("Split error when loading in the points");
 		while (points[++x])
 			sys->map.points[x + (y * sys->map.ll)] = \
 			load_xyz(points[x], x, y, sys->img->endian);
 		ft_free(points);
+		free(line);
 		y++;
 		line = get_next_line(fd);
 	}

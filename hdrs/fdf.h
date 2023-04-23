@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:19:33 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/16 20:44:07 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/23 18:14:00 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int				check_filename(char *file);
 int				count_or_check_line(int fd);
 int				check_valid(int fd, t_map *map);
 void			check_line_points(char **line);
+void			erase_new_line(char *line);
 int				count_char(char *str, char c);
 int				forbidden_chars(char *str, char *allowed);
 void			check_hexadecimal(char *str, char ***tofree);
@@ -122,4 +123,5 @@ unsigned int	get_color_step(unsigned int one, unsigned int two, int p);
 void			debug_split(char **strings);
 void			debug_points(t_system *sys);
 void			debug_line(t_system *sys);
+void			debug_colors(t_system *sys);
 #endif

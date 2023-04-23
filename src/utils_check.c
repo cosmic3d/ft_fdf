@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:04:28 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/16 22:41:18 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/04/23 19:04:57 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,13 @@ int	count_or_check_line(int fd)
 
 	i = 0;
 	line = get_next_line(fd);
+	erase_new_line(line);
 	if (!line)
 		return (0);
+	printf("Line is: %s\n", line);
 	if (forbidden_chars(line, "0123456789abcdefABCDEF, xX-+"))
 		f_exit("Forbidden characters were detected");
-	if (!ft_strchr(line, ' ') || !ft_strchr(line, '\n'))
+	if (!ft_strchr(line, ' '))
 		f_exit("Map syntax error");
 	points = ft_split(line, ' ');
 	if (!points)
@@ -69,7 +71,7 @@ int	count_or_check_line(int fd)
 		i++;
 	ft_free(points);
 	free(line);
-	return (i - 1);
+	return (i);
 }
 
 int	check_valid(int fd, t_map *map)
@@ -101,7 +103,7 @@ void	check_line_points(char **line)
 	char	**vals;
 
 	i = -1;
-	while (line[++i] && line[i][0] != '\n')
+	while (line[++i] && line[i][0] != '\n' && line)
 	{
 		vals = ft_split(line[i], ',');
 		if (count_char(line[i], ',') > 1)

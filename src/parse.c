@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 19:30:41 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/23 20:14:18 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:22:32 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,12 @@
 unsigned int	hexstr_to_int(char *str)
 {
 	unsigned int	result;
-	int				shift;
-	int				i;
 
-	result = 0;
-	shift = 0;
-	i = ft_strlen(str);
-	while (--i >= 0)
-	{
-		if (str[i] >= '0' && str[i] <= '9')
-			result |= (str[i] - '0') << shift;
-		else
-			result |= (uppercase(str[i]) - 'A') << shift;
-		shift += 4;
-	}
-	printf("Value is: %x\n", result);
+	result = strtol(str + 2, NULL, 16);
+	if (ft_strlen(str) - 2 <= 6)
+		result |= 0xFF000000;
+	printf("String value is: %s\n", str);
+	printf("Int value is: %X\n", result);
 	return (result);
 }
 

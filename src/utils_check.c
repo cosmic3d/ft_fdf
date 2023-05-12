@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:04:28 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/23 19:04:57 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/05/12 13:30:57 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	count_or_check_line(int fd)
 	erase_new_line(line);
 	if (!line)
 		return (0);
-	printf("Line is: %s\n", line);
 	if (forbidden_chars(line, "0123456789abcdefABCDEF, xX-+"))
 		f_exit("Forbidden characters were detected");
 	if (!ft_strchr(line, ' '))

@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 15:13:58 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/23 20:51:49 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:53:02 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	load_map(t_system *sys, int fd)
 
 	y = 0;
 	sys->map.points = (t_point *)malloc(sizeof(t_point) * sys->map.length);
+	sys->map.change = 0;
 	line = get_next_line(fd);
 	if (!sys->map.points || !line)
 		f_exit("Malloc error when loading in the points");

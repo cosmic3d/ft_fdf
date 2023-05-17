@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:19:06 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/10 19:46:04 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:17:11 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,5 @@ void	isometric(t_system *sys)
 		sys->map.points[i].spos[X] = (int)round(x_iso);
 		sys->map.points[i].spos[Y] = (int)round(y_iso);
 	}
+	sys->map.change = 1;
 }

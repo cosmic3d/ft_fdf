@@ -6,27 +6,25 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 19:30:41 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/05/12 14:22:32 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/05/17 19:22:45 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../hdrs/fdf.h"
 
-unsigned int	hexstr_to_int(char *str)
+int	hexstr_to_int(char *str)
 {
-	unsigned int	result;
+	int	result;
 
 	result = strtol(str + 2, NULL, 16);
-	if (ft_strlen(str) - 2 <= 6)
-		result |= 0xFF000000;
-	printf("String value is: %s\n", str);
-	printf("Int value is: %X\n", result);
+	// if (ft_strlen(str) - 2 <= 6)
+	// 	result |= 0xFF000000;
 	return (result);
 }
 
-unsigned int	compose_color(unsigned int value, int endian)
+int	compose_color(int value, int endian)
 {
-	unsigned int	color;
+	int	color;
 	unsigned char	*bytes;
 
 	bytes = (unsigned char *)&value;

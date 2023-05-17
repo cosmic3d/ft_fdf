@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:27:04 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/05/12 12:22:03 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/05/17 19:08:55 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	init_system(t_system *sys)
 	fd = open(sys->filename, O_RDONLY);
 	load_map(sys, fd);
 	close(fd);
+	// debug_colors(sys);
 	ft_printf("Number of points is: %i\n", sys->map.length);
 	ft_printf("Number of points per line is: %i\n", sys->map.ll);
 	hook(sys);

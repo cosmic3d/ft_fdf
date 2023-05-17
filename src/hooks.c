@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 18:19:48 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/23 19:31:37 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:54:03 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	keypressed(int keycode, t_system *sys)
 		translate(&sys->map, 0, TRANSLATE);
 	if (keycode == KEY_I)
 		isometric(sys);
-	render(sys);
+	if (sys->map.change)
+		render(sys);
 	return (0);
 }

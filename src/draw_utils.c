@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:13:52 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/23 19:53:03 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/05/17 19:42:29 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,30 @@ void	init_view(t_system *sys)
 	sys->view.z_scale = (WINX * WINY) / (sys->dim.width * sys->dim.height * \
 	pow(sys->view.scale, 2) * log(sys->dim.altitude + 2));
 	isometric(sys);
-	// printf("View scale is: %f", sys->view.scale);
-	// printf("View z scale is: %f", sys->view.z_scale);
-	// f_exit("uwu");
 }
 
-unsigned int	get_color_step(unsigned int one, unsigned int two, int p)
+double	get_color_step(int one, int two, int p)
 {
-	unsigned int	step_color[4];
+	double	step_color[4];
+	int		delta[4];
 
-	step_color[0] = ((int)(two >> 24) - (int)(one >> 24)) / p;
-	step_color[1] = ((int)((two >> 16) & 0xff) - (int)((one >> 16) & 0xff)) / p;
-	step_color[2] = ((int)((two >> 8) & 0xff) - (int)((one >> 8) & 0xff)) / p;
-	step_color[3] = ((int)(two & 0xff) - (int)(one & 0xff)) / p;
-	return (*(unsigned int *)step_color);
+	delta[0] = (int)(two >> 24) - (int)(one >> 24);
+	delta[1] = (int)((two >> 16) & 0xff) - (int)((one >> 16) & 0xff);
+	delta[2] = (int)((two >> 8) & 0xff) - (int)((one >> 8) & 0xff);
+	delta[3] = (int)(two & 0xff) - (int)(one & 0xff);
+
+	// printf("Delta 0: %i\n", delta[0]);
+	// printf("Delta 1: %i\n", delta[1]);
+	// printf("Delta 2: %i\n", delta[2]);
+	// printf("Delta 3: %i\n", delta[3]);
+	step_color[0] = round(delta[0] / p);
+	step_color[1] = round(delta[1] / p);
+	step_color[2] = round(delta[2] / p);
+	step_color[3] = round(delta[3] / p);
+	// printf("Step 0: %i\n", step_color[0]);
+	// printf("Step 1: %i\n", step_color[1]);
+	// printf("Step 2: %i\n", step_color[2]);
+	// printf("Step 3: %i\n", step_color[3]);
+
+	return (*(int *)step_color);
 }

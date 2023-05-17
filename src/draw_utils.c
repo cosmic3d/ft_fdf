@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:13:52 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/05/17 19:42:29 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/05/17 20:30:57 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ void	init_view(t_system *sys)
 	isometric(sys);
 }
 
-double	get_color_step(int one, int two, int p)
+double	*get_color_step(int one, int two, int p)
 {
-	double	step_color[4];
+	double	*step_color;
 	int		delta[4];
 
 	delta[0] = (int)(two >> 24) - (int)(one >> 24);
@@ -89,6 +89,7 @@ double	get_color_step(int one, int two, int p)
 	// printf("Delta 1: %i\n", delta[1]);
 	// printf("Delta 2: %i\n", delta[2]);
 	// printf("Delta 3: %i\n", delta[3]);
+	step_color = malloc(4 * sizeof(double));
 	step_color[0] = round(delta[0] / p);
 	step_color[1] = round(delta[1] / p);
 	step_color[2] = round(delta[2] / p);
@@ -98,5 +99,5 @@ double	get_color_step(int one, int two, int p)
 	// printf("Step 2: %i\n", step_color[2]);
 	// printf("Step 3: %i\n", step_color[3]);
 
-	return (*(int *)step_color);
+	return ((double *)step_color);
 }

@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:19:33 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/05/17 20:10:23 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/05/17 20:26:28 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void			ft_free(char **str);
 t_data			*get_img(t_system *sys);
 void			load_map(t_system *sys, int fd);
 t_point			load_xyz(char *rawvals, int x, int z, int endian);
-void			draw_line(t_system *sys, t_point one, t_point two, double step);
+void			draw_line(t_system *sys, t_point one, t_point two, double *step);
 void			put_pixel(t_data *img, int x, int y, int color);
 void			translate(t_map *map, int x, int y);
 void			scale(t_map *map, t_point multiplier);
@@ -117,7 +117,7 @@ void			render(t_system *sys);
 void			hook(t_system *sys);
 int				keypressed(int keycode, t_system *sys);
 void			clean_img(t_system *sys);
-double			get_color_step(int one, int two, int p);
+double			*get_color_step(int one, int two, int p);
 double			*current_step(double *step, int p);
 /* ---------------------------------- DEBUG --------------------------------- */
 void			debug_split(char **strings);

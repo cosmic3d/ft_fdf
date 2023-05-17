@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:55:18 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/05/17 20:15:31 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/05/17 20:37:17 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	next_color(int *origin, double *step)
 	return (*(int *)origin);
 }
 
-void	draw_line(t_system *sys, t_point one, t_point two, double step)
+void	draw_line(t_system *sys, t_point one, t_point two, double *step)
 {
 	double			delta[2];
 	double			xy[2];
@@ -57,10 +57,12 @@ void	draw_line(t_system *sys, t_point one, t_point two, double step)
 	{
 		printf("Pos x: %i\n", (int)round(xy[X]));
 		printf("Pos y: %i\n", (int)round(xy[Y]));
+		printf("Delta x: %f\n", delta[X]);
+		printf("Delta y: %f\n", delta[Y]);
 		put_pixel(sys->img, (int)round(xy[X]), (int)round(xy[Y]), one.color);
 		xy[X] += delta[X];
 		xy[Y] += delta[Y];
-		progress = current_step(&step, pixels[1]++);
+		progress = current_step(step, ++pixels[1]);
 		printf("Progress 0 is: %F\n", progress[0]);
 		printf("Progress 1 is: %F\n", progress[1]);
 		printf("Progress 2 is: %F\n", progress[2]);
@@ -68,6 +70,7 @@ void	draw_line(t_system *sys, t_point one, t_point two, double step)
 		one.color = next_color(&one.color, progress);
 		pixels[0]--;
 	}
+	free(step);
 }
 
 void	connect_points(t_system *sys)

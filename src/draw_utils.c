@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:13:52 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/05/17 20:30:57 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/05/24 14:52:09 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	init_view(t_system *sys)
 	sys->view.angle = 35.26;
 	sys->view.window_occ = 0.5;
 	sys->view.scale = get_scale_factor(sys);
-	sys->view.z_scale = (WINX * WINY) / (sys->dim.width * sys->dim.height * \
-	pow(sys->view.scale, 2) * log(sys->dim.altitude + 2));
+	sys->view.z_scale = (WINX * WINY) / (sys->dim.width * sys->dim.height
+			* pow(sys->view.scale, 2) * log(sys->dim.altitude + 2));
 	isometric(sys);
 }
 
@@ -84,20 +84,10 @@ double	*get_color_step(int one, int two, int p)
 	delta[1] = (int)((two >> 16) & 0xff) - (int)((one >> 16) & 0xff);
 	delta[2] = (int)((two >> 8) & 0xff) - (int)((one >> 8) & 0xff);
 	delta[3] = (int)(two & 0xff) - (int)(one & 0xff);
-
-	// printf("Delta 0: %i\n", delta[0]);
-	// printf("Delta 1: %i\n", delta[1]);
-	// printf("Delta 2: %i\n", delta[2]);
-	// printf("Delta 3: %i\n", delta[3]);
 	step_color = malloc(4 * sizeof(double));
-	step_color[0] = round(delta[0] / p);
-	step_color[1] = round(delta[1] / p);
-	step_color[2] = round(delta[2] / p);
-	step_color[3] = round(delta[3] / p);
-	// printf("Step 0: %i\n", step_color[0]);
-	// printf("Step 1: %i\n", step_color[1]);
-	// printf("Step 2: %i\n", step_color[2]);
-	// printf("Step 3: %i\n", step_color[3]);
-
+	step_color[0] = delta[0] / p;
+	step_color[1] = delta[1] / p;
+	step_color[2] = delta[2] / p;
+	step_color[3] = delta[3] / p;
 	return ((double *)step_color);
 }

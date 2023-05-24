@@ -3,74 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:55:18 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/05/17 20:37:17 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/05/24 15:18:43 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../hdrs/fdf.h"
 
-double	*current_step(double *step, int p)
+void	next_color(int *origin, double *step)
 {
-	int	i;
+	unsigned char	*bytes;
 
-	i = -1;
-	while (++i < 4)
-		step[i] *= p;
-	return ((double *)step);
+	bytes = (unsigned char *)origin;
+	bytes[0] += (int)round(step[3]);
+	bytes[1] += (int)round(step[2]);
+	bytes[2] += (int)round(step[1]);
+	bytes[3] += (int)round(step[0]);
 }
 
-int	next_color(int *origin, double *step)
+void	draw_line(t_system *sys, t_point one, t_point two, double *s)
 {
-	int	i;
-
-	i = -1;
-	while (++i < 4)
-	{
-		origin[i] += step[i];
-		origin[i] = (int)round(origin[i]);
-	}
-	return (*(int *)origin);
-}
-
-void	draw_line(t_system *sys, t_point one, t_point two, double *step)
-{
-	double			delta[2];
-	double			xy[2];
-	double			*progress;
-	int				pixels[2];
+	double	delta[2];
+	double	xy[2];
+	int		pixels;
 
 	delta[X] = (double)two.spos[X] - (double)one.spos[X];
 	delta[Y] = (double)two.spos[Y] - (double)one.spos[Y];
 	if (!delta[X] && !delta[Y])
 		return ;
-	pixels[0] = (int)sqrt((delta[X] * delta[X]) + (delta[Y] * delta[Y]));
-	delta[X] /= pixels[0];
-	delta[Y] /= pixels[0];
+	pixels = (int)sqrt((delta[X] * delta[X]) + (delta[Y] * delta[Y]));
+	delta[X] /= pixels;
+	delta[Y] /= pixels;
 	xy[X] = one.spos[X];
 	xy[Y] = one.spos[Y];
-	step = get_color_step(one.color, two.color, pixels[0]);
-	pixels[1] = 0;
-	while (pixels[0])
+	s = get_color_step(one.color, two.color, pixels);
+	while (pixels)
 	{
-		printf("Pos x: %i\n", (int)round(xy[X]));
-		printf("Pos y: %i\n", (int)round(xy[Y]));
-		printf("Delta x: %f\n", delta[X]);
-		printf("Delta y: %f\n", delta[Y]);
 		put_pixel(sys->img, (int)round(xy[X]), (int)round(xy[Y]), one.color);
 		xy[X] += delta[X];
 		xy[Y] += delta[Y];
-		progress = current_step(step, ++pixels[1]);
-		printf("Progress 0 is: %F\n", progress[0]);
-		printf("Progress 1 is: %F\n", progress[1]);
-		printf("Progress 2 is: %F\n", progress[2]);
-		printf("Progress 3 is: %F\n", progress[3]);
-		one.color = next_color(&one.color, progress);
-		pixels[0]--;
+		next_color(&one.color, s);
+		pixels--;
 	}
-	free(step);
+	free(s);
 }
 
 void	connect_points(t_system *sys)

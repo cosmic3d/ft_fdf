@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eventcodes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 19:37:28 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/04/16 19:45:21 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:36:38 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # define KEY_PRESS              2
 # define KEY_RELEASE            3
-# define BUTTON_PRESS           4
-# define BUTTON_RELEASE         5
-# define MOTION_NOTIFY          6
+# define BUTTON_MOUSEDOWN       4
+# define BUTTON_MOUSEUP         5
+# define BUTTON_MOUSEMOVE       6
 # define ENTER_NOTIFY           7
 # define LEAVE_NOTIFY           8
 # define FOCUS_IN               9

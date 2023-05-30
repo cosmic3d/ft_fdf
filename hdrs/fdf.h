@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:19:33 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/05/24 14:41:59 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/05/30 21:36:49 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "../lib/ft_printf/inc/ft_printf.h"
 # include "../lib/minilibx_macos/mlx.h"
 # include "defines.h"
+# include "eventcodes.h"
 # include "get_next_line.h"
 # include "keycodes.h"
 # include <errno.h>
@@ -76,11 +77,20 @@ typedef struct s_map
 	int				change;
 }					t_map;
 
+typedef struct s_hooks
+{
+	int				leftclickdownpos[2];
+	int				rightclickdownpos[2];
+	int				isleftclickdown;
+	int				isrightclickdown;
+}					t_hooks;
+
 typedef struct s_system
 {
 	t_map			map;
 	t_view			view;
 	t_dim			dim;
+	t_hooks			hooks;
 	void			*mlx_ptr;
 	void			*mlx_win;
 	t_data			*img;
@@ -111,7 +121,7 @@ void				draw_line(t_system *sys, t_point one, t_point two,
 						double *s);
 void				put_pixel(t_data *img, int x, int y, int color);
 void				translate(t_map *map, int x, int y);
-void				scale(t_map *map, t_point multiplier);
+void				scale(t_map *map, float mult);
 double				deg_to_rad(float degrees);
 void				init_dims(t_system *sys);
 void				isometric(t_system *sys);
@@ -122,6 +132,9 @@ void				init_view(t_system *sys);
 void				render(t_system *sys);
 void				hook(t_system *sys);
 int					keypressed(int keycode, t_system *sys);
+int					mousedown(int button, int x, int y, t_system *sys);
+int					mouseup(int button, int x, int y, t_system *sys);
+int					mousemove(int x, int y, t_system *sys);
 void				clean_img(t_system *sys);
 double				*get_color_step(int one, int two, int p);
 void				next_color(int *origin, double *step);

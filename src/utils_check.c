@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:04:28 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/05/12 13:30:57 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/05/30 20:19:20 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	check_all(int argc, char **argv, t_map *map)
 {
-	int		fd;
+	int	fd;
 
 	if (argc == 1)
 		f_exit("You need to introduce a map to represent");
@@ -75,12 +75,12 @@ int	count_or_check_line(int fd)
 
 int	check_valid(int fd, t_map *map)
 {
-	int		line1;
-	int		line;
+	int	line1;
+	int	line;
 
 	line1 = count_or_check_line(fd);
 	map->ll = line1;
-	map->length += line1;
+	map->length = line1;
 	if (!line1)
 		return (0);
 	line = count_or_check_line(fd);

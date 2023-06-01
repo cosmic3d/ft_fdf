@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 18:19:48 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/05/30 21:32:44 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/01 21:37:36 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ int	mousedown(int button, int x, int y, t_system *sys)
 	// if (button == MOUSE_SCROLLUP)
 	// 	translate(&sys->map, 0, TRANSLATE);
 	if (button == MOUSE_SCROLLDOWN)
-		scale(&sys->map, ZOOM);
+		scale(&sys->map, ZOOM, x, y);
 	if (button == MOUSE_SCROLLUP)
-		scale(&sys->map, -ZOOM);
+		scale(&sys->map, -ZOOM, x, y);
 	if (sys->map.change)
 		render(sys);
 	return (0);

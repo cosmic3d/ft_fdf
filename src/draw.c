@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:55:18 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/05/24 15:18:43 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/01 20:31:20 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ void	draw_line(t_system *sys, t_point one, t_point two, double *s)
 	double	xy[2];
 	int		pixels;
 
-	delta[X] = (double)two.spos[X] - (double)one.spos[X];
-	delta[Y] = (double)two.spos[Y] - (double)one.spos[Y];
+	delta[X] = two.spos[X] - one.spos[X];
+	delta[Y] = two.spos[Y] - one.spos[Y];
 	if (!delta[X] && !delta[Y])
 		return ;
-	pixels = (int)sqrt((delta[X] * delta[X]) + (delta[Y] * delta[Y]));
+	pixels = sqrt((delta[X] * delta[X]) + (delta[Y] * delta[Y]));
 	delta[X] /= pixels;
 	delta[Y] /= pixels;
 	xy[X] = one.spos[X];
@@ -61,7 +61,7 @@ void	connect_points(t_system *sys)
 	{
 		if (i + ll < sys->map.length)
 			draw_line(sys, sys->map.points[i], sys->map.points[i + ll], 0x0);
-		if ((i + 1) % ll != 0)
+		if (((i + 1) % ll != 0))
 			draw_line(sys, sys->map.points[i], sys->map.points[i + 1], 0x0);
 	}
 }

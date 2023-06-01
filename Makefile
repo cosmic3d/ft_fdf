@@ -28,7 +28,7 @@ PRINTF_DIR = lib/ft_printf/
 # -=-=-=-=-	CMNDS -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 CC			= gcc
 SANS		= -fsanitize=address -g
-CFLAGS		= -Wall -Werror -Wextra -D BUFFER_SIZE=42 -g2
+CFLAGS		= -Wall -Werror -Wextra -D BUFFER_SIZE=42 -O3
 LFLAGS		=  -L$(LBX_DIR) -lmlx -framework OpenGL -framework AppKit
 AR			= ar -rcs
 RM			= rm -f
@@ -47,7 +47,8 @@ INCLUDE		= -I $(LIBS_HDRS)
 SRCS		+= fdf.c utils_check.c free.c \
 get_next_line.c get_next_line_utils.c pixels.c \
 utils_check2.c int_check.c parse.c load.c \
-draw_utils.c angles.c draw.c geometry.c debug.c hooks.c
+draw_utils.c angles.c draw.c geometry.c debug.c hooks.c \
+geometry_utils.c
 
 
 # -=-=-=-=-	OBJECTS/DEPENDENCIES -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #

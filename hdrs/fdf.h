@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:19:33 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/05/30 21:36:49 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/01 21:34:25 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_map
 	int				length;
 	int				ll;
 	int				change;
+	int				zoom;
 }					t_map;
 
 typedef struct s_hooks
@@ -121,7 +122,7 @@ void				draw_line(t_system *sys, t_point one, t_point two,
 						double *s);
 void				put_pixel(t_data *img, int x, int y, int color);
 void				translate(t_map *map, int x, int y);
-void				scale(t_map *map, float mult);
+void				scale(t_map *map, float mult, int mousex, int mousey);
 double				deg_to_rad(float degrees);
 void				init_dims(t_system *sys);
 void				isometric(t_system *sys);
@@ -138,6 +139,8 @@ int					mousemove(int x, int y, t_system *sys);
 void				clean_img(t_system *sys);
 double				*get_color_step(int one, int two, int p);
 void				next_color(int *origin, double *step);
+void				get_lowest_distance(t_map *map);
+int					get_distance(t_point one, t_point two);
 /* ---------------------------------- DEBUG --------------------------------- */
 void				debug_split(char **strings);
 void				debug_points(t_system *sys);

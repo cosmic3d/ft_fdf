@@ -48,7 +48,7 @@ SRCS		+= fdf.c utils_check.c free.c \
 get_next_line.c get_next_line_utils.c pixels.c \
 utils_check2.c int_check.c parse.c load.c \
 draw_utils.c angles.c draw.c geometry.c debug.c hooks.c \
-geometry_utils.c
+geometry_utils.c cohenshuterland.c
 
 
 # -=-=-=-=-	OBJECTS/DEPENDENCIES -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #

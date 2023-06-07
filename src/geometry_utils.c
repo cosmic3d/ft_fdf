@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 19:25:19 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/01 21:08:21 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/07 19:16:19 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,15 @@ int	get_distance(t_point one, t_point two)
 	delta[X] = two.spos[X] - one.spos[X];
 	delta[Y] = two.spos[Y] - one.spos[Y];
 	return (sqrt((delta[X] * delta[X]) + (delta[Y] * delta[Y])));
+}
+
+int	point_inside_screen(t_point one, t_point two)
+{
+	if (one.spos[X] < WINX && one.spos[X] > 0 && one.spos[Y] < WINY
+		&& one.spos[Y] > 0)
+		return (1);
+	if (two.spos[X] < WINX && two.spos[X] > 0 && two.spos[Y] < WINY
+		&& two.spos[Y] > 0)
+		return (1);
+	return (0);
 }

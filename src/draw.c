@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:55:18 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/01 20:31:20 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/07 20:15:22 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,15 @@ void	connect_points(t_system *sys)
 	while (++i < sys->map.length)
 	{
 		if (i + ll < sys->map.length)
-			draw_line(sys, sys->map.points[i], sys->map.points[i + ll], 0x0);
+			if (cohensutherland(sys->map.points[i], \
+			sys->map.points[i + ll]))
+				draw_line(sys, sys->map.points[i], \
+				sys->map.points[i + ll], 0x0);
 		if (((i + 1) % ll != 0))
-			draw_line(sys, sys->map.points[i], sys->map.points[i + 1], 0x0);
+			if (cohensutherland(sys->map.points[i], \
+			sys->map.points[i + 1]))
+				draw_line(sys, sys->map.points[i], \
+				sys->map.points[i + 1], 0x0);
 	}
 }
 

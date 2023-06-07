@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:27:04 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/05/30 19:48:40 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/07 19:01:07 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	init_system(t_system *sys)
 	hook(sys);
 	init_view(sys);
 	render(sys);
+	// debug_points(sys);
 	mlx_loop(sys->mlx_ptr);
 }
 

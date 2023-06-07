@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 16:47:09 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/01 21:38:42 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/07 19:03:32 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,35 +27,51 @@ void	translate(t_map *map, int x, int y)
 
 void	scale(t_map *map, float mult, int mousex, int mousey)
 {
+	int	mousediff[2];
+
+	if (mult < 0 && map->zoom <= 1)
+		return ;
+	if (mult > 0)
+	{
+		mousediff[X] = (mousex * mult) - mousex;
+		mousediff[Y] = (mousey * mult) - mousey;
+	}
+	else
+	{
+		mousediff[X] = (mousex / get_abs(mult)) - mousex;
+		mousediff[Y] = (mousey / get_abs(mult)) - mousey;
+	}
+	zoom(map, mult, mousediff);
+	map->change = 1;
+	get_lowest_distance(map);
+	return ;
+}
+
+void	zoom(t_map *map, float mult, int mousediff[2])
+{
 	int	i;
 
 	i = -1;
-	mousex = 0;
-	mousey = 0;
-	if (mult < 0 && map->zoom <= 1)
-		return ;
 	if (mult > 0)
 	{
 		while (++i < map->length)
 		{
 			map->points[i].spos[X] *= mult;
 			map->points[i].spos[Y] *= mult;
-			// map->points[i].spos[X] += mousex - map->points[i].spos[X];
-			// map->points[i].spos[Y] += mousey - map->points[i].spos[Y];
+			map->points[i].spos[X] -= mousediff[X];
+			map->points[i].spos[Y] -= mousediff[Y];
 		}
-		map->change = 1;
-		get_lowest_distance(map);
 		return ;
 	}
-	mult *= -1;
-	while (++i < map->length)
+	else
 	{
-		map->points[i].spos[X] /= mult;
-		map->points[i].spos[Y] /= mult;
-		// map->points[i].spos[X] += mousex - map->points[i].spos[X];
-		// map->points[i].spos[Y] += mousey - map->points[i].spos[Y];
+		mult *= -1;
+		while (++i < map->length)
+		{
+			map->points[i].spos[X] /= mult;
+			map->points[i].spos[Y] /= mult;
+			map->points[i].spos[X] -= mousediff[X];
+			map->points[i].spos[Y] -= mousediff[Y];
+		}
 	}
-	map->change = 1;
-	get_lowest_distance(map);
-	return ;
 }

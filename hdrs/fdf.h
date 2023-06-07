@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:19:33 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/01 21:34:25 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/07 21:08:37 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void				draw_line(t_system *sys, t_point one, t_point two,
 void				put_pixel(t_data *img, int x, int y, int color);
 void				translate(t_map *map, int x, int y);
 void				scale(t_map *map, float mult, int mousex, int mousey);
+void				zoom(t_map *map, float mult, int mousediff[2]);
 double				deg_to_rad(float degrees);
 void				init_dims(t_system *sys);
 void				isometric(t_system *sys);
@@ -141,6 +142,11 @@ double				*get_color_step(int one, int two, int p);
 void				next_color(int *origin, double *step);
 void				get_lowest_distance(t_map *map);
 int					get_distance(t_point one, t_point two);
+int					point_inside_screen(t_point one, t_point two);
+int					computeoutcode(float x, float y);
+int					cohensutherland(t_point p1, t_point p2);
+void				cohensutherland_2(t_point p1, t_point p2, \
+int codeout, float *xy[2]);
 /* ---------------------------------- DEBUG --------------------------------- */
 void				debug_split(char **strings);
 void				debug_points(t_system *sys);

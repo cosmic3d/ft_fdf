@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:13:52 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/05/30 19:22:47 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/12 19:33:40 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ void	init_view(t_system *sys)
 	sys->hooks.isleftclickdown = 0;
 	sys->hooks.isrightclickdown = 0;
 	get_max_dims(sys);
-	sys->view.angle = 35.26;
+	sys->view.angle[X] = 0;
+	sys->view.angle[Y] = 0;
+	sys->view.angle[Z] = 0;
 	sys->view.window_occ = 0.5;
 	sys->view.scale = get_scale_factor(sys);
 	sys->view.z_scale = (WINX * WINY) / (sys->dim.width * sys->dim.height

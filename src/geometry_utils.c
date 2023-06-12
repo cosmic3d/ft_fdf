@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 19:25:19 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/07 19:16:19 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/12 21:10:38 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	get_lowest_distance(t_map *map)
 {
-	int	i;
-	int	distances[2];
+	int		i;
+	float	distances[2];
 
 	i = -1;
 	map->zoom = 0;
@@ -38,22 +38,32 @@ void	get_lowest_distance(t_map *map)
 	}
 }
 
-int	get_distance(t_point one, t_point two)
+float	get_distance(t_point one, t_point two)
 {
-	int	delta[2];
+	float	delta[2];
 
 	delta[X] = two.spos[X] - one.spos[X];
 	delta[Y] = two.spos[Y] - one.spos[Y];
 	return (sqrt((delta[X] * delta[X]) + (delta[Y] * delta[Y])));
 }
 
-int	point_inside_screen(t_point one, t_point two)
+void	change_angle(t_system *sys, int x, int y)
 {
-	if (one.spos[X] < WINX && one.spos[X] > 0 && one.spos[Y] < WINY
-		&& one.spos[Y] > 0)
-		return (1);
-	if (two.spos[X] < WINX && two.spos[X] > 0 && two.spos[Y] < WINY
-		&& two.spos[Y] > 0)
-		return (1);
-	return (0);
+	int	x_diff;
+	int	y_diff;
+
+	x_diff = sys->hooks.leftclickdownpos[X] - x;
+	y_diff = sys->hooks.leftclickdownpos[Y] - y;
+	sys->view.angle[X] = sys->hooks.leftclickdownangle[X] \
+	+ (int)round(x_diff / ROTATE_DIV);
+	sys->view.angle[Y] = sys->hooks.leftclickdownangle[Y] \
+	+ (int)round(y_diff / ROTATE_DIV);
+	if (sys->view.angle[X] > 360)
+		sys->view.angle[X] -= 360;
+	if (sys->view.angle[X] < 0)
+		sys->view.angle[X] += 360;
+	if (sys->view.angle[Y] > 360)
+		sys->view.angle[Y] -= 360;
+	if (sys->view.angle[Y] < 0)
+		sys->view.angle[Y] += 360;
 }

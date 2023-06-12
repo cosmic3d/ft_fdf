@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:19:33 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/07 21:08:37 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/12 20:54:09 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_dim
 
 typedef struct s_view
 {
-	float			angle;
+	int				angle[3];
 	float			window_occ;
 	float			scale;
 	float			z_scale;
@@ -75,11 +75,12 @@ typedef struct s_map
 	int				length;
 	int				ll;
 	int				change;
-	int				zoom;
+	float			zoom;
 }					t_map;
 
 typedef struct s_hooks
 {
+	int				leftclickdownangle[3];
 	int				leftclickdownpos[2];
 	int				rightclickdownpos[2];
 	int				isleftclickdown;
@@ -124,6 +125,7 @@ void				put_pixel(t_data *img, int x, int y, int color);
 void				translate(t_map *map, int x, int y);
 void				scale(t_map *map, float mult, int mousex, int mousey);
 void				zoom(t_map *map, float mult, int mousediff[2]);
+void				rotate(t_system *sys, int x, int y);
 double				deg_to_rad(float degrees);
 void				init_dims(t_system *sys);
 void				isometric(t_system *sys);
@@ -141,7 +143,8 @@ void				clean_img(t_system *sys);
 double				*get_color_step(int one, int two, int p);
 void				next_color(int *origin, double *step);
 void				get_lowest_distance(t_map *map);
-int					get_distance(t_point one, t_point two);
+float				get_distance(t_point one, t_point two);
+void				change_angle(t_system *sys, int x, int y);
 int					point_inside_screen(t_point one, t_point two);
 int					computeoutcode(float x, float y);
 int					cohensutherland(t_point p1, t_point p2);

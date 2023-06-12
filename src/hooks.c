@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 18:19:48 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/01 21:37:36 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/12 21:09:59 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 void	hook(t_system *sys)
 {
-	mlx_hook(sys->mlx_win, 17, 0, f_exit, "");
-	mlx_hook(sys->mlx_win, 2, 0, keypressed, sys);
+	mlx_hook(sys->mlx_win, DESTROY_NOTIFY, 0, f_exit, "");
+	mlx_hook(sys->mlx_win, KEY_PRESS, 0, keypressed, sys);
 	mlx_hook(sys->mlx_win, BUTTON_MOUSEDOWN, 0, mousedown, sys);
-	if (sys->hooks.isleftclickdown || sys->hooks.isrightclickdown)
-		mlx_hook(sys->mlx_win, BUTTON_MOUSEMOVE, 0, mousemove, sys);
+	mlx_hook(sys->mlx_win, BUTTON_MOUSEMOVE, 0, mousemove, sys);
 	mlx_hook(sys->mlx_win, BUTTON_MOUSEUP, 0, mouseup, sys);
 }
 
@@ -45,6 +44,8 @@ int	mousedown(int button, int x, int y, t_system *sys)
 {
 	if (button == MOUSE_LEFTCLICK)
 	{
+		sys->hooks.leftclickdownangle[X] = sys->view.angle[X];
+		sys->hooks.leftclickdownangle[Y] = sys->view.angle[Y];
 		sys->hooks.leftclickdownpos[X] = x;
 		sys->hooks.leftclickdownpos[Y] = y;
 		sys->hooks.isleftclickdown = 1;
@@ -55,10 +56,6 @@ int	mousedown(int button, int x, int y, t_system *sys)
 		sys->hooks.rightclickdownpos[Y] = y;
 		sys->hooks.isrightclickdown = 1;
 	}
-	// if (button == MOUSE_SCROLLDOWN)
-	// 	translate(&sys->map, TRANSLATE, 0);
-	// if (button == MOUSE_SCROLLUP)
-	// 	translate(&sys->map, 0, TRANSLATE);
 	if (button == MOUSE_SCROLLDOWN)
 		scale(&sys->map, ZOOM, x, y);
 	if (button == MOUSE_SCROLLUP)
@@ -73,6 +70,8 @@ int	mouseup(int button, int x, int y, t_system *sys)
 	if (button == MOUSE_LEFTCLICK)
 	{
 		sys->hooks.isleftclickdown = 0;
+		sys->hooks.leftclickdownangle[X] = sys->view.angle[X];
+		sys->hooks.leftclickdownangle[Y] = sys->view.angle[Y];
 		sys->hooks.leftclickdownpos[X] = x;
 		sys->hooks.leftclickdownpos[Y] = y;
 	}
@@ -89,7 +88,6 @@ int	mousemove(int x, int y, t_system *sys)
 {
 	int	rc[2];
 
-	// int	lc[2];
 	if (sys->hooks.isrightclickdown)
 	{
 		rc[X] = (x - sys->hooks.rightclickdownpos[X]);
@@ -98,6 +96,8 @@ int	mousemove(int x, int y, t_system *sys)
 		sys->hooks.rightclickdownpos[X] = x;
 		sys->hooks.rightclickdownpos[Y] = y;
 	}
+	if (sys->hooks.isleftclickdown)
+		rotate(sys, x, y);
 	if (sys->map.change)
 		render(sys);
 	return (0);

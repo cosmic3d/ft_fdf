@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:55:18 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/12 20:55:53 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/13 19:36:24 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	draw_line(t_system *sys, t_point one, t_point two, double *s)
 	if (!delta[X] && !delta[Y])
 		return ;
 	pixels = sqrt((delta[X] * delta[X]) + (delta[Y] * delta[Y]));
+	if (!pixels)
+		return ;
 	delta[X] /= pixels;
 	delta[Y] /= pixels;
 	xy[X] = one.spos[X];

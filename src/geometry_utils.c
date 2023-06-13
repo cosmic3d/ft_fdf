@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 19:25:19 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/12 21:10:38 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/13 17:11:25 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	change_angle(t_system *sys, int x, int y)
 	x_diff = sys->hooks.leftclickdownpos[X] - x;
 	y_diff = sys->hooks.leftclickdownpos[Y] - y;
 	sys->view.angle[X] = sys->hooks.leftclickdownangle[X] \
-	+ (int)round(x_diff / ROTATE_DIV);
-	sys->view.angle[Y] = sys->hooks.leftclickdownangle[Y] \
 	+ (int)round(y_diff / ROTATE_DIV);
+	sys->view.angle[Y] = sys->hooks.leftclickdownangle[Y] \
+	+ (int)round(x_diff / ROTATE_DIV);
 	if (sys->view.angle[X] > 360)
 		sys->view.angle[X] -= 360;
 	if (sys->view.angle[X] < 0)

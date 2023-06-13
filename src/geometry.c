@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 16:47:09 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/12 21:22:10 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/13 19:39:12 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,11 @@ void	rotate(t_system *sys, int x, int y)
 
 	i = -1;
 	change_angle(sys, x, y);
-	printf("Y before: %f\n", sys->map.points[0].spos[Y]);
 	while (++i < sys->map.length)
 	{
-		sys->map.points[i].spos[Y] = sys->map.points[i].spos[Y] * cos(sys->view.angle[X]) - sys->map.points[i].spos[Z] * sin(sys->view.angle[X]);
+		sys->map.points[i].spos[Y] = sys->map.points[i].scopypos[Y] * cos(deg_to_rad(sys->view.angle[X])) - sys->map.points[i].scopypos[Z] * sin(deg_to_rad(sys->view.angle[X]));
+		sys->map.points[i].spos[Z] = sys->map.points[i].scopypos[Y] * sin(deg_to_rad(sys->view.angle[X])) + sys->map.points[i].scopypos[Z] * cos(deg_to_rad(sys->view.angle[X]));
 	}
-	printf("Y after: %f\n", sys->map.points[0].spos[Y]);
-	printf("X angle is: %i\n\n", sys->view.angle[X]);
 	sys->map.change = 1;
 }
 

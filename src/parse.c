@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 19:30:41 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/05/24 14:55:40 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/13 19:19:16 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int	compose_color(int value, int endian)
 	return (color);
 }
 
-double	deg_to_rad(float degrees)
+float	deg_to_rad(float degrees)
 {
-	double	radians;
+	float	radians;
 
 	radians = degrees * (M_PI / 180.0);
 	return (radians);

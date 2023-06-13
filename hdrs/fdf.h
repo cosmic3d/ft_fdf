@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:19:33 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/12 20:54:09 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/13 19:19:25 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_point
 {
 	float			pos[3];
 	float			spos[3];
+	float			scopypos[3];
 	int				color;
 }					t_point;
 
@@ -126,7 +127,7 @@ void				translate(t_map *map, int x, int y);
 void				scale(t_map *map, float mult, int mousex, int mousey);
 void				zoom(t_map *map, float mult, int mousediff[2]);
 void				rotate(t_system *sys, int x, int y);
-double				deg_to_rad(float degrees);
+float				deg_to_rad(float degrees);
 void				init_dims(t_system *sys);
 void				isometric(t_system *sys);
 float				get_abs(float num);

@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 16:47:09 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/13 19:39:12 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/13 21:15:28 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,22 @@ void	translate(t_map *map, int x, int y)
 	{
 		map->points[i].spos[X] += x;
 		map->points[i].spos[Y] += y;
+		map->points[i].scopypos[X] += x;
+		map->points[i].scopypos[Y] += y;
 	}
 	map->change = 1;
 }
 
-void	rotate(t_system *sys, int x, int y)
+void	rotate(t_system *sys)
 {
 	int	i;
 
 	i = -1;
-	change_angle(sys, x, y);
 	while (++i < sys->map.length)
 	{
-		sys->map.points[i].spos[Y] = sys->map.points[i].scopypos[Y] * cos(deg_to_rad(sys->view.angle[X])) - sys->map.points[i].scopypos[Z] * sin(deg_to_rad(sys->view.angle[X]));
-		sys->map.points[i].spos[Z] = sys->map.points[i].scopypos[Y] * sin(deg_to_rad(sys->view.angle[X])) + sys->map.points[i].scopypos[Z] * cos(deg_to_rad(sys->view.angle[X]));
+		rot_x(sys, &sys->map.points[i]);
+		rot_y(sys, &sys->map.points[i]);
+		rot_z(sys, &sys->map.points[i]);
 	}
 	sys->map.change = 1;
 }
@@ -42,6 +44,7 @@ void	rotate(t_system *sys, int x, int y)
 void	scale(t_map *map, float mult, int mousex, int mousey)
 {
 	int	mousediff[2];
+	int	i;
 
 	if ((mult < 0 && map->zoom <= MAXZOOMOUT) || \
 	(mult > 0 && map->zoom >= MAXZOOMIN))
@@ -56,37 +59,30 @@ void	scale(t_map *map, float mult, int mousex, int mousey)
 		mousediff[X] = (mousex / get_abs(mult)) - mousex;
 		mousediff[Y] = (mousey / get_abs(mult)) - mousey;
 	}
-	zoom(map, mult, mousediff);
+	i = -1;
+	while (++i < map->length)
+	{
+		zoom(map->points[i].spos, mult, mousediff);
+		zoom(map->points[i].scopypos, mult, mousediff);
+	}
 	map->change = 1;
 	get_lowest_distance(map);
 	return ;
 }
 
-void	zoom(t_map *map, float mult, int mousediff[2])
+void	zoom(float *p, float mult, int mousediff[2])
 {
-	int	i;
-
-	i = -1;
 	if (mult > 0)
 	{
-		while (++i < map->length)
-		{
-			map->points[i].spos[X] *= mult;
-			map->points[i].spos[Y] *= mult;
-			map->points[i].spos[X] -= mousediff[X];
-			map->points[i].spos[Y] -= mousediff[Y];
-		}
+		p[X] *= mult;
+		p[Y] *= mult;
+		p[X] -= mousediff[X];
+		p[Y] -= mousediff[Y];
 		return ;
 	}
-	else
-	{
-		mult *= -1;
-		while (++i < map->length)
-		{
-			map->points[i].spos[X] /= mult;
-			map->points[i].spos[Y] /= mult;
-			map->points[i].spos[X] -= mousediff[X];
-			map->points[i].spos[Y] -= mousediff[Y];
-		}
-	}
+	mult *= -1;
+	p[X] /= mult;
+	p[Y] /= mult;
+	p[X] -= mousediff[X];
+	p[Y] -= mousediff[Y];
 }

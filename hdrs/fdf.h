@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:19:33 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/13 19:19:25 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/13 21:08:01 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,14 @@ void				draw_line(t_system *sys, t_point one, t_point two,
 void				put_pixel(t_data *img, int x, int y, int color);
 void				translate(t_map *map, int x, int y);
 void				scale(t_map *map, float mult, int mousex, int mousey);
-void				zoom(t_map *map, float mult, int mousediff[2]);
-void				rotate(t_system *sys, int x, int y);
+void				zoom(float *p, float mult, int mousediff[2]);
+void				rotate(t_system *sys);
+void				rot_x(t_system *sys, t_point *p);
+void				rot_y(t_system *sys, t_point *p);
+void				rot_z(t_system *sys, t_point *p);
 float				deg_to_rad(float degrees);
 void				init_dims(t_system *sys);
+void				angle(t_system *sys, int x, int y, int z);
 void				isometric(t_system *sys);
 float				get_abs(float num);
 void				get_max_dims(t_system *sys);
@@ -150,7 +154,8 @@ int					point_inside_screen(t_point one, t_point two);
 int					computeoutcode(float x, float y);
 int					cohensutherland(t_point p1, t_point p2);
 void				cohensutherland_2(t_point p1, t_point p2, \
-int codeout, float *xy[2]);
+int codeout, float *xy);
+int					cohenshuterland_3(int codeout, int *code);
 /* ---------------------------------- DEBUG --------------------------------- */
 void				debug_split(char **strings);
 void				debug_points(t_system *sys);

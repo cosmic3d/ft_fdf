@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 18:19:48 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/12 21:09:59 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/13 20:55:27 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,10 @@ int	mousemove(int x, int y, t_system *sys)
 		sys->hooks.rightclickdownpos[Y] = y;
 	}
 	if (sys->hooks.isleftclickdown)
-		rotate(sys, x, y);
+	{
+		change_angle(sys, x, y);
+		rotate(sys);
+	}
 	if (sys->map.change)
 		render(sys);
 	return (0);

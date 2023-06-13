@@ -6,11 +6,19 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:19:06 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/13 18:53:13 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/13 21:17:43 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../hdrs/fdf.h"
+
+void	angle(t_system *sys, int x, int y, int z)
+{
+	sys->view.angle[X] = x;
+	sys->view.angle[Y] = y;
+	sys->view.angle[Z] = z;
+	rotate(sys);
+}
 
 void	isometric(t_system *sys)
 {
@@ -31,5 +39,6 @@ void	isometric(t_system *sys)
 		sys->map.points[i].scopypos[Y] = sys->map.points[i].spos[Y];
 		sys->map.points[i].scopypos[Z] = sys->map.points[i].spos[Z];
 	}
+	angle(sys, 30, 330, 30);
 	sys->map.change = 1;
 }

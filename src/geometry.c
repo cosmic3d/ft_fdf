@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 16:47:09 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/13 21:15:28 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/15 20:58:22 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,19 @@ void	translate(t_map *map, int x, int y)
 
 void	rotate(t_system *sys)
 {
-	int	i;
+	int		i;
+	t_point	tmp_point;
 
 	i = -1;
+	sys->map.center = get_map_center(sys);
 	while (++i < sys->map.length)
 	{
-		rot_x(sys, &sys->map.points[i]);
-		rot_y(sys, &sys->map.points[i]);
-		rot_z(sys, &sys->map.points[i]);
+		tmp_point.scopypos[X] = sys->map.points[i].scopypos[X];
+		tmp_point.scopypos[Y] = sys->map.points[i].scopypos[Y];
+		tmp_point.scopypos[Z] = sys->map.points[i].scopypos[Z];
+		rot_y(sys, &sys->map.points[i], &tmp_point);
+		rot_z(sys, &sys->map.points[i], &tmp_point);
+		rot_x(sys, &sys->map.points[i], &tmp_point);
 	}
 	sys->map.change = 1;
 }
@@ -76,6 +81,7 @@ void	zoom(float *p, float mult, int mousediff[2])
 	{
 		p[X] *= mult;
 		p[Y] *= mult;
+		p[Z] *= mult;
 		p[X] -= mousediff[X];
 		p[Y] -= mousediff[Y];
 		return ;
@@ -83,6 +89,7 @@ void	zoom(float *p, float mult, int mousediff[2])
 	mult *= -1;
 	p[X] /= mult;
 	p[Y] /= mult;
+	p[Z] /= mult;
 	p[X] -= mousediff[X];
 	p[Y] -= mousediff[Y];
 }

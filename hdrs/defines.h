@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:58:10 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/12 21:09:19 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/15 19:03:44 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 # define ZOOM 1.1
 # define MAXZOOMIN 20000
-# define MAXZOOMOUT 1.2
+# define MAXZOOMOUT 0.1
 
-# define ROTATE_DIV 20
+# define ROTATE_DIV 1
 #endif

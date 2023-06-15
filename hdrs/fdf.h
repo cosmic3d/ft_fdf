@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:19:33 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/13 21:08:01 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/15 20:57:08 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_dim
 
 typedef struct s_view
 {
-	int				angle[3];
+	float			angle[3];
 	float			window_occ;
 	float			scale;
 	float			z_scale;
@@ -73,6 +73,7 @@ typedef struct s_view
 typedef struct s_map
 {
 	t_point			*points;
+	t_point			center;
 	int				length;
 	int				ll;
 	int				change;
@@ -127,13 +128,14 @@ void				translate(t_map *map, int x, int y);
 void				scale(t_map *map, float mult, int mousex, int mousey);
 void				zoom(float *p, float mult, int mousediff[2]);
 void				rotate(t_system *sys);
-void				rot_x(t_system *sys, t_point *p);
-void				rot_y(t_system *sys, t_point *p);
-void				rot_z(t_system *sys, t_point *p);
+void				rot_x(t_system *sys, t_point *p, t_point *tmp);
+void				rot_y(t_system *sys, t_point *p, t_point *tmp);
+void				rot_z(t_system *sys, t_point *p, t_point *tmp);
 float				deg_to_rad(float degrees);
 void				init_dims(t_system *sys);
 void				angle(t_system *sys, int x, int y, int z);
 void				isometric(t_system *sys);
+void				parallel(t_system *sys);
 float				get_abs(float num);
 void				get_max_dims(t_system *sys);
 float				get_scale_factor(t_system *sys);
@@ -141,6 +143,7 @@ void				init_view(t_system *sys);
 void				render(t_system *sys);
 void				hook(t_system *sys);
 int					keypressed(int keycode, t_system *sys);
+void				keypressed_2(int keycode, t_system *sys);
 int					mousedown(int button, int x, int y, t_system *sys);
 int					mouseup(int button, int x, int y, t_system *sys);
 int					mousemove(int x, int y, t_system *sys);
@@ -149,7 +152,9 @@ double				*get_color_step(int one, int two, int p);
 void				next_color(int *origin, double *step);
 void				get_lowest_distance(t_map *map);
 float				get_distance(t_point one, t_point two);
-void				change_angle(t_system *sys, int x, int y);
+t_point				get_map_center(t_system *sys);
+void				change_angle_with_mouse(t_system *sys, int x, int y);
+void				clamp_angle(t_system *sys);
 int					point_inside_screen(t_point one, t_point two);
 int					computeoutcode(float x, float y);
 int					cohensutherland(t_point p1, t_point p2);

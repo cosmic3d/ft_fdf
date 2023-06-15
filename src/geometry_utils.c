@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 19:25:19 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/13 17:11:25 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/15 20:12:04 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,18 @@ float	get_distance(t_point one, t_point two)
 	return (sqrt((delta[X] * delta[X]) + (delta[Y] * delta[Y])));
 }
 
-void	change_angle(t_system *sys, int x, int y)
+t_point	get_map_center(t_system *sys)
+{
+	t_point	center;
+
+	center.spos[X] = (sys->map.points[sys->map.length - 1].scopypos[X] \
+	- sys->map.points[0].scopypos[X]) / 2 + sys->map.points[0].scopypos[X];
+	center.spos[Y] = (sys->map.points[sys->map.length - 1].scopypos[Y] \
+	- sys->map.points[0].scopypos[Y]) / 2 + sys->map.points[0].scopypos[Y];
+	return (center);
+}
+
+void	change_angle_with_mouse(t_system *sys, int x, int y)
 {
 	int	x_diff;
 	int	y_diff;
@@ -55,15 +66,24 @@ void	change_angle(t_system *sys, int x, int y)
 	x_diff = sys->hooks.leftclickdownpos[X] - x;
 	y_diff = sys->hooks.leftclickdownpos[Y] - y;
 	sys->view.angle[X] = sys->hooks.leftclickdownangle[X] \
-	+ (int)round(y_diff / ROTATE_DIV);
+	+ y_diff / ROTATE_DIV;
 	sys->view.angle[Y] = sys->hooks.leftclickdownangle[Y] \
-	+ (int)round(x_diff / ROTATE_DIV);
-	if (sys->view.angle[X] > 360)
+	+ x_diff / ROTATE_DIV;
+	clamp_angle(sys);
+}
+
+void	clamp_angle(t_system *sys)
+{
+	if (sys->view.angle[X] >= 360)
 		sys->view.angle[X] -= 360;
 	if (sys->view.angle[X] < 0)
 		sys->view.angle[X] += 360;
-	if (sys->view.angle[Y] > 360)
+	if (sys->view.angle[Y] >= 360)
 		sys->view.angle[Y] -= 360;
 	if (sys->view.angle[Y] < 0)
 		sys->view.angle[Y] += 360;
+	if (sys->view.angle[Z] >= 360)
+		sys->view.angle[Z] -= 360;
+	if (sys->view.angle[Z] < 0)
+		sys->view.angle[Z] += 360;
 }

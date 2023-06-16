@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 19:55:49 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/13 20:44:48 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/16 19:58:02 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int	cohensutherland(t_point p1, t_point p2)
 	float	xy[2];
 	int		codeout;
 
-	code[0] = computeoutcode(p1.spos[0], p1.spos[1]);
-	code[1] = computeoutcode(p2.spos[0], p2.spos[1]);
+	code[0] = computeoutcode(p1.spos[X], p1.spos[Y]);
+	code[1] = computeoutcode(p2.spos[X], p2.spos[Y]);
 	while (1)
 	{
 		if (code[0] == 0 && code[1] == 0)
@@ -46,14 +46,14 @@ int	cohensutherland(t_point p1, t_point p2)
 		cohensutherland_2(p1, p2, codeout, xy);
 		if (codeout == code[0])
 		{
-			p1.spos[0] = xy[X];
-			p1.spos[1] = xy[Y];
-			code[0] = computeoutcode(p1.spos[0], p1.spos[1]);
+			p1.spos[X] = xy[X];
+			p1.spos[Y] = xy[Y];
+			code[0] = computeoutcode(p1.spos[X], p1.spos[Y]);
 			continue ;
 		}
-		p2.spos[0] = xy[X];
-		p2.spos[1] = xy[Y];
-		code[1] = computeoutcode(p2.spos[0], p2.spos[1]);
+		p2.spos[X] = xy[X];
+		p2.spos[Y] = xy[Y];
+		code[1] = computeoutcode(p2.spos[X], p2.spos[Y]);
 	}
 }
 

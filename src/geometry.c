@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 16:47:09 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/15 20:58:22 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/16 20:23:55 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	rotate(t_system *sys)
 		tmp_point.scopypos[X] = sys->map.points[i].scopypos[X];
 		tmp_point.scopypos[Y] = sys->map.points[i].scopypos[Y];
 		tmp_point.scopypos[Z] = sys->map.points[i].scopypos[Z];
+		rot_x(sys, &sys->map.points[i], &tmp_point);
 		rot_y(sys, &sys->map.points[i], &tmp_point);
 		rot_z(sys, &sys->map.points[i], &tmp_point);
-		rot_x(sys, &sys->map.points[i], &tmp_point);
 	}
 	sys->map.change = 1;
 }

@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:55:18 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/15 18:42:54 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/16 19:45:13 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	render(t_system *sys)
 {
 	clean_img(sys);
 	connect_points(sys);
-	//draw_line(sys, sys->map.points[0], get_map_center(sys), 0);
 	mlx_put_image_to_window(sys->mlx_ptr, sys->mlx_win, sys->img->img, 0, 0);
 	sys->map.change = 0;
 }

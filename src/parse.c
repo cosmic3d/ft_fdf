@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 19:30:41 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/13 19:19:16 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/16 19:47:58 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,12 @@ int	hexstr_to_int(char *str)
 	int	result;
 
 	result = strtol(str + 2, NULL, 16);
-	// if (ft_strlen(str) - 2 <= 6)
-	// 	result |= 0xFF000000;
 	return (result);
 }
 
 int	compose_color(int value, int endian)
 {
-	int	color;
+	int				color;
 	unsigned char	*bytes;
 
 	bytes = (unsigned char *)&value;

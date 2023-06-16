@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 19:25:19 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/15 20:12:04 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/16 19:44:29 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	change_angle_with_mouse(t_system *sys, int x, int y)
 	sys->view.angle[X] = sys->hooks.leftclickdownangle[X] \
 	+ y_diff / ROTATE_DIV;
 	sys->view.angle[Y] = sys->hooks.leftclickdownangle[Y] \
-	+ x_diff / ROTATE_DIV;
+	- x_diff / ROTATE_DIV;
 	clamp_angle(sys);
 }
 

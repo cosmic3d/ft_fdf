@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 19:25:19 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/16 19:44:29 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/20 21:29:04 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,3 +87,19 @@ void	clamp_angle(t_system *sys)
 	if (sys->view.angle[Z] < 0)
 		sys->view.angle[Z] += 360;
 }
+
+// void	clamp_angle(t_system *sys)
+// {
+// 	if (sys->view.angle[X] >= 360)
+// 		sys->view.angle[X] = (int)round(fmod(sys->view.angle[X], 360));
+// 	if (sys->view.angle[X] < 0)
+// 		sys->view.angle[X] += 360;
+// 	if (sys->view.angle[Y] >= 360)
+// 		sys->view.angle[Y] -= 360;
+// 	if (sys->view.angle[Y] < 0)
+// 		sys->view.angle[Y] += 360;
+// 	if (sys->view.angle[Z] >= 360)
+// 		sys->view.angle[Z] -= 360;
+// 	if (sys->view.angle[Z] < 0)
+// 		sys->view.angle[Z] += 360;
+// }

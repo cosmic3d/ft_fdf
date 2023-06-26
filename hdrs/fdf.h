@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:19:33 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/16 20:28:52 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/26 22:11:44 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@
 # include <stdlib.h>
 # include <unistd.h>
 /* --------------------------------- STRUCTS -------------------------------- */
+
+typedef struct s_matrix
+{
+	float	matrix[3][3];
+}			t_matrix;
+
 
 typedef struct s_point
 {
@@ -128,9 +134,9 @@ void				translate(t_map *map, int x, int y);
 void				scale(t_map *map, float mult, int mousex, int mousey);
 void				zoom(float *p, float mult, int mousediff[2]);
 void				rotate(t_system *sys);
-void				rot_x(t_system *sys, t_point *p, t_point *tmp);
-void				rot_y(t_system *sys, t_point *p, t_point *tmp);
-void				rot_z(t_system *sys, t_point *p, t_point *tmp);
+void				rot_x(t_system *sys, t_point *tmp, t_point *newpoint);
+void				rot_y(t_system *sys, t_point *tmp, t_point *newpoint);
+void				rot_z(t_system *sys, t_point *tmp, t_point *newpoint);
 float				deg_to_rad(float degrees);
 void				init_dims(t_system *sys);
 void				angle(t_system *sys, int x, int y, int z);
@@ -161,9 +167,16 @@ int					cohensutherland(t_point p1, t_point p2);
 void				cohensutherland_2(t_point p1, t_point p2, \
 int codeout, float *xy);
 int					cohenshuterland_3(int codeout, int *code);
+void				print_info(t_system *sys);
+void				print_angle(t_system *sys);
+void				initialize_matrix(t_matrix *m);
+t_matrix			multiply_matrices(t_matrix one, t_matrix two);
+t_matrix			get_rxyz(t_system *sys);
+void				rotate_point(t_point *p, t_matrix rxyz);
 /* ---------------------------------- DEBUG --------------------------------- */
 void				debug_split(char **strings);
 void				debug_points(t_system *sys);
 void				debug_line(t_system *sys);
 void				debug_colors(t_system *sys);
+void				debug_matrix(t_matrix m);
 #endif

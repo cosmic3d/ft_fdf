@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 15:13:58 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/05/17 15:53:02 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/20 20:46:42 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_point	load_xyz(char *rawvals, int x, int y, int endian)
 		if (!vals)
 			f_exit("Split error when loading a point");
 		point.color = compose_color(hexstr_to_int(vals[1]), endian);
+		ft_free(vals);
 	}
 	point.pos[Y] = y;
 	point.pos[X] = x;

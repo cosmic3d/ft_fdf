@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/03 16:36:47 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/07 18:46:38 by jenavarr         ###   ########.fr       */
+/*   Created: 2023/06/26 20:53:44 by jenavarr          #+#    #+#             */
+/*   Updated: 2023/06/26 22:38:52 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,20 @@ void	debug_colors(t_system *sys)
 	i = -1;
 	while (++i < sys->map.length)
 		printf("Point %i color is: %x\n", i, sys->map.points[i].color);
+}
+
+void	debug_matrix(t_matrix m)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < 3)
+	{
+		j = -1;
+		while (++j < 3)
+			printf("%f ", m.matrix[i][j]);
+		printf("\n");
+	}
+	return ;
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/05 16:47:09 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/16 20:23:55 by jenavarr         ###   ########.fr       */
+/*   Created: 2023/06/26 20:50:57 by jenavarr          #+#    #+#             */
+/*   Updated: 2023/06/26 22:38:36 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,21 @@ void	translate(t_map *map, int x, int y)
 
 void	rotate(t_system *sys)
 {
-	int		i;
-	t_point	tmp_point;
+	int			i;
+	t_matrix	rxyz;
 
 	i = -1;
 	sys->map.center = get_map_center(sys);
+	rxyz = get_rxyz(sys);
 	while (++i < sys->map.length)
 	{
-		tmp_point.scopypos[X] = sys->map.points[i].scopypos[X];
-		tmp_point.scopypos[Y] = sys->map.points[i].scopypos[Y];
-		tmp_point.scopypos[Z] = sys->map.points[i].scopypos[Z];
-		rot_x(sys, &sys->map.points[i], &tmp_point);
-		rot_y(sys, &sys->map.points[i], &tmp_point);
-		rot_z(sys, &sys->map.points[i], &tmp_point);
+		sys->map.points[i].scopypos[X] -= sys->map.center.spos[X];
+		sys->map.points[i].scopypos[Y] -= sys->map.center.spos[Y];
+		rotate_point(&sys->map.points[i], rxyz);
+		sys->map.points[i].scopypos[X] += sys->map.center.spos[X];
+		sys->map.points[i].scopypos[Y] += sys->map.center.spos[Y];
+		sys->map.points[i].spos[X] += sys->map.center.spos[X];
+		sys->map.points[i].spos[Y] += sys->map.center.spos[Y];
 	}
 	sys->map.change = 1;
 }

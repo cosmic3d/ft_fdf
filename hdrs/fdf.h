@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:19:33 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/26 22:11:44 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/27 20:45:23 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ int					mouseup(int button, int x, int y, t_system *sys);
 int					mousemove(int x, int y, t_system *sys);
 void				clean_img(t_system *sys);
 double				*get_color_step(int one, int two, int p);
-void				next_color(int *origin, double *step);
+void				next_color(int *origin, int *color_tmp, int p, double *step);
 void				get_lowest_distance(t_map *map);
 float				get_distance(t_point one, t_point two);
 t_point				get_map_center(t_system *sys);

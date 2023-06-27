@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 18:13:52 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/12 19:33:40 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/27 20:06:07 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,17 @@ double	*get_color_step(int one, int two, int p)
 	delta[2] = (int)((two >> 8) & 0xff) - (int)((one >> 8) & 0xff);
 	delta[3] = (int)(two & 0xff) - (int)(one & 0xff);
 	step_color = malloc(4 * sizeof(double));
-	step_color[0] = delta[0] / p;
-	step_color[1] = delta[1] / p;
-	step_color[2] = delta[2] / p;
-	step_color[3] = delta[3] / p;
+	step_color[0] = (double)delta[0] / p;
+	step_color[1] = (double)delta[1] / p;
+	step_color[2] = (double)delta[2] / p;
+	step_color[3] = (double)delta[3] / p;
+	// printf("Pixels: %i\n", p);
+	// int	i = -1;
+	// 	while (++i < 4)
+	// 		printf("Delta %i value: %i\n", i, delta[i]);
+	// 	i = -1;
+	// 	while (++i < 4)
+	// 		printf("Step %i value: %f\n", i, step_color[i]);
+	// 	f_exit("EXITING DEBUG");
 	return ((double *)step_color);
 }

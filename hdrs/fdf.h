@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:19:33 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/27 20:45:23 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/27 21:42:13 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ void				put_pixel(t_data *img, int x, int y, int color);
 void				translate(t_map *map, int x, int y);
 void				scale(t_map *map, float mult, int mousex, int mousey);
 void				zoom(float *p, float mult, int mousediff[2]);
+void				zscale(t_system *sys, int change);
 void				rotate(t_system *sys);
 void				rot_x(t_system *sys, t_point *tmp, t_point *newpoint);
 void				rot_y(t_system *sys, t_point *tmp, t_point *newpoint);
@@ -155,7 +156,8 @@ int					mouseup(int button, int x, int y, t_system *sys);
 int					mousemove(int x, int y, t_system *sys);
 void				clean_img(t_system *sys);
 double				*get_color_step(int one, int two, int p);
-void				next_color(int *origin, int *color_tmp, int p, double *step);
+void				next_color(int *origin, int *color_tmp, int p, \
+double *step);
 void				get_lowest_distance(t_map *map);
 float				get_distance(t_point one, t_point two);
 t_point				get_map_center(t_system *sys);
@@ -169,6 +171,7 @@ int codeout, float *xy);
 int					cohenshuterland_3(int codeout, int *code);
 void				print_info(t_system *sys);
 void				print_angle(t_system *sys);
+void				print_zoom(t_system *sys);
 void				initialize_matrix(t_matrix *m);
 t_matrix			multiply_matrices(t_matrix one, t_matrix two);
 t_matrix			get_rxyz(t_system *sys);

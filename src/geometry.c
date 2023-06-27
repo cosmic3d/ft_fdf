@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 20:50:57 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/26 22:38:36 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/27 21:47:39 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,20 @@ void	zoom(float *p, float mult, int mousediff[2])
 	p[Z] /= mult;
 	p[X] -= mousediff[X];
 	p[Y] -= mousediff[Y];
+}
+
+void	zscale(t_system *sys, int change)
+{
+	int	i;
+
+	i = -1;
+	sys->view.z_scale += change;
+	while (++i < sys->map.length)
+	{
+		sys->map.points[i].spos[Z] = (int)round(sys->map.points[i].pos[Z] \
+		* sys->view.z_scale);
+		sys->map.points[i].scopypos[Z] = sys->map.points[i].spos[Z];
+	}
+	angle(sys, sys->view.angle[X], sys->view.angle[Y], sys->view.angle[Z]);
+	sys->map.change = 1;
 }

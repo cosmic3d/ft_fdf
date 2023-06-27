@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 18:19:48 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/26 22:19:29 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/27 21:42:52 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ int	keypressed(int keycode, t_system *sys)
 	if (keycode == KEY_E)
 		angle(sys, sys->view.angle[X], \
 		sys->view.angle[Y], sys->view.angle[Z] + 1);
+	if (keycode == KEY_Z)
+		zscale(sys, 1);
+	if (keycode == KEY_X)
+		zscale(sys, -1);
 	if (keycode == KEY_ESC)
 		f_exit("");
 	if (keycode == KEY_I)
@@ -54,12 +58,12 @@ void	keypressed_2(int keycode, t_system *sys)
 	if (keycode == KEY_W)
 		angle(sys, sys->view.angle[X] + 1, \
 		sys->view.angle[Y], sys->view.angle[Z]);
-	if (keycode == KEY_S)
-		angle(sys, sys->view.angle[X] - 1, \
-		sys->view.angle[Y], sys->view.angle[Z]);
 	if (keycode == KEY_A)
 		angle(sys, sys->view.angle[X], \
 		sys->view.angle[Y] - 1, sys->view.angle[Z]);
+	if (keycode == KEY_S)
+		angle(sys, sys->view.angle[X] - 1, \
+		sys->view.angle[Y], sys->view.angle[Z]);
 	if (keycode == KEY_D)
 		angle(sys, sys->view.angle[X], \
 		sys->view.angle[Y] + 1, sys->view.angle[Z]);

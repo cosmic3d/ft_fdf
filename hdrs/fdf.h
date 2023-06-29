@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:19:33 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/29 20:43:28 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/29 20:52:05 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_matrix
 {
 	float	matrix[3][3];
 }			t_matrix;
-
 
 typedef struct s_point
 {
@@ -177,10 +176,4 @@ void				initialize_matrix(t_matrix *m);
 t_matrix			multiply_matrices(t_matrix one, t_matrix two);
 t_matrix			get_rxyz(t_system *sys);
 void				rotate_point(t_point *p, t_matrix rxyz);
-/* ---------------------------------- DEBUG --------------------------------- */
-void				debug_split(char **strings);
-void				debug_points(t_system *sys);
-void				debug_line(t_system *sys);
-void				debug_colors(t_system *sys);
-void				debug_matrix(t_matrix m);
 #endif

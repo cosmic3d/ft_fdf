@@ -23,7 +23,6 @@ INC_DIR	= hdrs/
 LIB_DIR	= lib/ft_libft/
 LBX_DIR = lib/minilibx_macos/
 PRINTF_DIR = lib/ft_printf/
-#BONUS_DIR = 
 
 # -=-=-=-=-	CMNDS -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 CC			= gcc
@@ -47,7 +46,7 @@ INCLUDE		= -I $(LIBS_HDRS)
 SRCS		+= fdf.c utils_check.c free.c \
 get_next_line.c get_next_line_utils.c pixels.c \
 utils_check2.c int_check.c parse.c load.c \
-draw_utils.c angles.c draw.c geometry.c debug.c hooks.c \
+draw_utils.c angles.c draw.c geometry.c hooks.c \
 geometry_utils.c cohenshuterland.c mouse.c menu.c matrix.c
 
 

@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 21:00:40 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/27 21:29:41 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/29 19:29:27 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	print_info(t_system *sys)
 {
 	print_angle(sys);
 	print_zoom(sys);
+	print_zfactor(sys);
 }
 
 void	print_angle(t_system *sys)
@@ -34,11 +35,9 @@ void	print_angle(t_system *sys)
 	mlx_string_put(sys->mlx_ptr, sys->mlx_win, M_TAB + M_SEP, 125, 0xFF0000, y);
 	mlx_string_put(sys->mlx_ptr, sys->mlx_win, M_TAB, 150, 0xFF0000, "Z:");
 	mlx_string_put(sys->mlx_ptr, sys->mlx_win, M_TAB + M_SEP, 150, 0xFF0000, z);
-
 	free(x);
 	free(y);
 	free(z);
-
 }
 
 void	print_zoom(t_system *sys)
@@ -49,4 +48,14 @@ void	print_zoom(t_system *sys)
 	mlx_string_put(sys->mlx_ptr, sys->mlx_win, M_TAB, 200, 0xFF0000, "ZOOM");
 	mlx_string_put(sys->mlx_ptr, sys->mlx_win, M_TAB, 225, 0xFF0000, zoom);
 	free(zoom);
+}
+
+void	print_zfactor(t_system *sys)
+{
+	char	*zfactor;
+
+	zfactor = ft_itoa(sys->view.z_scale);
+	mlx_string_put(sys->mlx_ptr, sys->mlx_win, M_TAB, 275, 0xFF0000, "ZFACTOR");
+	mlx_string_put(sys->mlx_ptr, sys->mlx_win, M_TAB, 300, 0xFF0000, zfactor);
+	free(zfactor);
 }

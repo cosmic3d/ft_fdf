@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 18:19:48 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/27 21:42:52 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/29 19:24:06 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	keypressed(int keycode, t_system *sys)
 		angle(sys, sys->view.angle[X], \
 		sys->view.angle[Y], sys->view.angle[Z] + 1);
 	if (keycode == KEY_Z)
-		zscale(sys, 1);
+		zscale(sys, ZFACTOR_MOD);
 	if (keycode == KEY_X)
-		zscale(sys, -1);
+		zscale(sys, -ZFACTOR_MOD);
 	if (keycode == KEY_ESC)
 		f_exit("");
 	if (keycode == KEY_I)

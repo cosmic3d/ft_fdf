@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:19:06 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/26 22:36:30 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/29 19:20:31 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	isometric(t_system *sys)
 		sys->map.points[i].scopypos[Y] = sys->map.points[i].spos[Y];
 		sys->map.points[i].scopypos[Z] = sys->map.points[i].spos[Z];
 	}
-	angle(sys, 30, 330, 30);
+	angle(sys, 45, 35, 330);
 	sys->map.change = 1;
 }
 

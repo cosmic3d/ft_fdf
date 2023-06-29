@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 20:50:57 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/27 21:47:39 by jenavarr         ###   ########.fr       */
+/*   Updated: 2023/06/29 19:16:35 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	zoom(float *p, float mult, int mousediff[2])
 	p[Y] -= mousediff[Y];
 }
 
-void	zscale(t_system *sys, int change)
+void	zscale(t_system *sys, float change)
 {
 	int	i;
 

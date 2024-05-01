@@ -22,6 +22,11 @@ OBJ_DIR	= obj/
 INC_DIR	= hdrs/
 LIB_DIR	= lib/ft_libft/
 LBX_DIR = lib/minilibx_macos/
+ifeq ($(OS),Linux)
+	LBX_DIR = lib/minilibx_linux/
+else ifeq ($(OS),Darwin)
+	LBX_DIR = lib/minilibx_macos/
+endif
 PRINTF_DIR = lib/ft_printf/
 
 # -=-=-=-=-	CMNDS -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #

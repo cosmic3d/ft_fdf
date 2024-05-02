@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 19:55:49 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/16 19:58:02 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/05/02 02:37:21 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,22 @@ int	computeoutcode(float x, float y)
 	return (code);
 }
 
+void	initialize_variables(t_point *p1, t_point *p2, int *code, float *xy)
+{
+	code[0] = computeoutcode(p1->spos[X], p1->spos[Y]);
+	code[1] = computeoutcode(p2->spos[X], p2->spos[Y]);
+	xy[X] = 0;
+	xy[Y] = 0;
+}
+
 int	cohensutherland(t_point p1, t_point p2)
 {
 	int		code[2];
 	float	xy[2];
 	int		codeout;
 
-	code[0] = computeoutcode(p1.spos[X], p1.spos[Y]);
-	code[1] = computeoutcode(p2.spos[X], p2.spos[Y]);
-	while (1)
+	initialize_variables(&p1, &p2, code, xy);
+	while (42)
 	{
 		if (code[0] == 0 && code[1] == 0)
 			return (1);

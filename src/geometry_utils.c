@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 19:25:19 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/27 21:33:18 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/05/02 02:30:04 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	get_lowest_distance(t_map *map)
 
 	i = -1;
 	map->zoom = 0;
+	distances[0] = 0;
+	distances[1] = 0;
 	while (++i < map->length)
 	{
 		if ((i + 1) % map->ll != 0)

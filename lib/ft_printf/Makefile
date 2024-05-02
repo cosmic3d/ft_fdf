@@ -12,7 +12,7 @@ INC_DIR	= inc/
 LIB_DIR	= libft/
 
 LIBS		= $(LIB_DIR)libft.a
-LIBS_HDRS	= -I $(LIB_DIR)libft.h
+LIBS_HDRS	= -I $(LIB_DIR)
 INCLUDE		= -I $(INC_DIR) $(LIBS_HDRS)
 
 SRCS		= ft_print_char.c ft_print_str.c ft_printf.c ft_print_int.c ft_print_hexlow.c ft_print_hexupp.c ft_print_ptr.c ft_print_unsigned.c

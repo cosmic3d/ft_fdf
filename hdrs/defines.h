@@ -6,15 +6,15 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:58:10 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/29 19:24:13 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/05/02 02:52:55 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
 # define DEFINES_H
 /* --------------------------------- MACROS --------------------------------- */
-# define WINX 1920
-# define WINY 1080
+# define WINX 640
+# define WINY 380
 
 # define X 0
 # define Y 1

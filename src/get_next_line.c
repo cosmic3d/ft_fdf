@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenavarr <jenavarr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 14:48:46 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/03/17 19:04:35 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/05/02 02:28:18 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,10 @@ char	*read_line(char	*buffer)
 
 char	*get_next_line(int fd)
 {
-	static char		*buffer[OPEN_MAX];
+	static char		*buffer[255];
 	char			*line;
 
-	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd > 255 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!buffer[fd])
 	{

@@ -6,7 +6,7 @@
 /*   By: jenavarr <jenavarr@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 18:19:48 by jenavarr          #+#    #+#             */
-/*   Updated: 2023/06/29 19:24:06 by jenavarr         ###   ########.fr       */
+/*   Updated: 2024/05/02 02:54:40 by jenavarr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void	hook(t_system *sys)
 {
 	mlx_hook(sys->mlx_win, DESTROY_NOTIFY, 0, f_exit, "");
-	mlx_hook(sys->mlx_win, KEY_PRESS, 0, keypressed, sys);
-	mlx_hook(sys->mlx_win, BUTTON_MOUSEDOWN, 0, mousedown, sys);
-	mlx_hook(sys->mlx_win, BUTTON_MOUSEMOVE, 0, mousemove, sys);
-	mlx_hook(sys->mlx_win, BUTTON_MOUSEUP, 0, mouseup, sys);
+	mlx_hook(sys->mlx_win, KEY_PRESS, 1L << 0, keypressed, sys);
+	mlx_hook(sys->mlx_win, BUTTON_MOUSEDOWN, 1L << 2, mousedown, sys);
+	mlx_hook(sys->mlx_win, BUTTON_MOUSEMOVE, 1L << 6, mousemove, sys);
+	mlx_hook(sys->mlx_win, BUTTON_MOUSEUP, 1L << 3, mouseup, sys);
 }
 
 int	keypressed(int keycode, t_system *sys)

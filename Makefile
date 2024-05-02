@@ -2,6 +2,7 @@
 
 NAME		= fdf
 MK			= Makefile
+OS = $(shell uname -s)
 
 # -=-=-=-=-	CLRS -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 
@@ -20,20 +21,15 @@ WHITE		:= \033[0;97m
 SRC_DIR	= src/
 OBJ_DIR	= obj/
 INC_DIR	= hdrs/
-LIB_DIR	= lib/ft_libft/
-LBX_DIR = lib/minilibx_macos/
-ifeq ($(OS),Linux)
-	LBX_DIR = lib/minilibx_linux/
-else ifeq ($(OS),Darwin)
-	LBX_DIR = lib/minilibx_macos/
-endif
-PRINTF_DIR = lib/ft_printf/
+LIBS_DIR = lib/
+X11_FLAGS = -lXext -lX11
+FRAMEWORK_FLAGS = -framework OpenGL -framework Appkit
+
 
 # -=-=-=-=-	CMNDS -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 CC			= gcc
 SANS		= -fsanitize=address -g
 CFLAGS		= -Wall -Werror -Wextra -D BUFFER_SIZE=42 -O3
-LFLAGS		=  -L$(LBX_DIR) -lmlx -framework OpenGL -framework AppKit
 AR			= ar -rcs
 RM			= rm -f
 MKDIR		= mkdir -p
@@ -41,11 +37,39 @@ CP			= cp -f
 
 # -=-=-=-=-	LIBS/HEADERS -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 
-LIBS		+= $(LIB_DIR)libft.a
-LIBS		+= $(PRINTF_DIR)libftprintf.a
-LIBS_HDRS	+= $(INC_DIR)fdf.h
-LIBS_HDRS	+= $(LBX_DIR)mlx.h
-INCLUDE		= -I $(LIBS_HDRS)
+# Libraries
+
+ifeq ($(OS),Linux)
+	LBX_DIR = $(LIBS_DIR)minilibx_linux/
+else ifeq ($(OS),Darwin)
+	LBX_DIR = $(LIBS_DIR)minilibx_macos/
+endif
+
+# imprimimos mlx_dir para ver
+$(info $(MLX_DIR))
+
+LFLAGS =
+
+ifeq ($(OS),Linux)
+	LFLAGS = -L$(LBX_DIR) -lmlx $(X11_FLAGS) -lm
+else ifeq ($(OS),Darwin)
+	LFLAGS = -L$(LBX_DIR) -lmlx $(FRAMEWORK_FLAGS) -lm
+endif
+
+LIB_DIR	= $(LIBS_DIR)ft_libft/
+LIBFT_LIB = libft.a
+LIBS += $(LIB_DIR)$(LIBFT_LIB)
+
+PRINTF_DIR = $(LIBS_DIR)ft_printf/
+PRINTF_LIB = libftprintf.a
+LIBS += $(PRINTF_DIR)$(PRINTF_LIB)
+
+MLX_LIB = libmlx.a
+LIBS += $(LBX_DIR)$(MLX_LIB)
+
+
+
+INCLUDE		= -I $(LBX_DIR) -I $(PRINTF_DIR) -I $(LIB_DIR) -I $(INC_DIR)
 
 # -=-=-=-=-	SOURCES -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 SRCS		+= fdf.c utils_check.c free.c \
@@ -63,19 +87,19 @@ DEP			= $(addsuffix .d, $(basename $(OBJS)))
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(MK)
 	@$(MKDIR) $(dir $@)
 	@echo "$(YELLOW)Compiling: $<$(RESET)"
-	@$(CC) -MT $@ -MMD -MP $(CFLAGS) -c $< -o $@
+	@$(CC) -MT $@ -MMD -MP $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 # -=-=-=-=-	MAKING LIBS AND COMPILING WITH THEM -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 
 all: make_libs $(NAME)
 
 make_libs:
+	@$(MAKE) -sC $(LBX_DIR)
 	@$(MAKE) -sC $(LIB_DIR)
 	@$(MAKE) -sC $(PRINTF_DIR)
-	@$(MAKE) -sC $(LBX_DIR)
 
-$(NAME): $(OBJS) $(LIBS)
-	@$(CC) $(CFLAGS) $(LFLAGS) $(OBJS) $(LIBS) -o $(NAME)
+$(NAME): $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) $(LFLAGS) $(LIBS) -o $(NAME) -lm
 	@echo "$(GREEN)🧩FDF COMPILED🧩$(RESET)"
 
 clean:
